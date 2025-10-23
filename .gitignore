@@ -41,6 +41,8 @@
 *.dwo
 
 #Custom
+*.vs
+*.VC.db
 GLFWApplication/.vs
+GLFWApplication/.vs/GLFWApplication
 GLFWApplication/Dependencies/SDL/VisualC
-
