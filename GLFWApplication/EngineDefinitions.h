@@ -5,6 +5,12 @@
 #include <iostream>
 
 namespace Engine {
+
+	#define Bytes(n) (n)
+	#define Kilobytes(n) (1024 * Bytes(n))
+	#define Megabytes(n) (1024 * Kilobytes(n))
+	#define Gigabytes(n) (1024 * Megabytes(n))
+
 	
 	void print(const char* msg) {
 		std::cout << msg << std::endl;
