@@ -78,11 +78,13 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalUsingDirectories>
       </AdditionalUsingDirectories>
-      <AdditionalIncludeDirectories>C:\Users\joe19\Documents\GitHub\GLFW-Application\GLFWApplication\Dependencies\SDL\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../GLFWApplication/Dependencies/SDL/include;../GLFWApplication/Dependencies/GLFW/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>../GLFWApplication/Dependencies/GLFW/lib-vc2022;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;user32.lib;gdi32.lib;kernel32.lib;shell32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -95,11 +97,13 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalUsingDirectories>
       </AdditionalUsingDirectories>
-      <AdditionalIncludeDirectories>C:\Users\joe19\Documents\GitHub\GLFW-Application\GLFWApplication\Dependencies\SDL\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../GLFWApplication/Dependencies/SDL/include;../GLFWApplication/Dependencies/GLFW/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>../GLFWApplication/Dependencies/GLFW/lib-vc2022;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;user32.lib;gdi32.lib;kernel32.lib;shell32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -110,11 +114,13 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalUsingDirectories>
       </AdditionalUsingDirectories>
-      <AdditionalIncludeDirectories>C:\Users\joe19\Documents\GitHub\GLFW-Application\GLFWApplication\Dependencies\SDL\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../GLFWApplication/Dependencies/SDL/include;../GLFWApplication/Dependencies/GLFW/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>../GLFWApplication/Dependencies/GLFW/lib-vc2022;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;user32.lib;gdi32.lib;kernel32.lib;shell32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -127,18 +133,22 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalUsingDirectories>
       </AdditionalUsingDirectories>
-      <AdditionalIncludeDirectories>C:\Users\joe19\Documents\GitHub\GLFW-Application\GLFWApplication\Dependencies\SDL\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../GLFWApplication/Dependencies/SDL/include;../GLFWApplication/Dependencies/GLFW/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>../GLFWApplication/Dependencies/GLFW/lib-vc2022;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;user32.lib;gdi32.lib;kernel32.lib;shell32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Entry.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="EngineDefinitions.h" />
     <ClInclude Include="Entry.h" />
+    <ClInclude Include="Memory.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Dependencies\SDL\VisualC\SDL\SDL.vcxproj">
