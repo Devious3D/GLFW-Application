@@ -1,6 +1,11 @@
 #Custom
 *.vs
 *.VC.db
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.vsidx
 GLFWApplication/.vs
 GLFWApplication/.vs/GLFWApplication
 GLFWApplication/Dependencies/SDL/VisualC
@@ -47,3 +52,4 @@ GLFWApplication/Dependencies/SDL/VisualC
 # debug information files
 *.dwo
 
+GLFWApplication/.vs/GLFWApplication/v17/Browse.VC.db
