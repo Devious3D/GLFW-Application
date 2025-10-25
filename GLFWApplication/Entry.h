@@ -4,12 +4,17 @@
 
 class GLFWwindow;
 
+template<typename T>
+class MemoryHandler;
+
 struct FEngine {
 
 	int windowWidth = 600;
 	int windowHeight = 700;
 	GLFWwindow* window = nullptr;
 };
+
+FEngine* engineMemory = nullptr;
 
 static void ProgramTick(float dt);
 static void CreateGlfwWindow();

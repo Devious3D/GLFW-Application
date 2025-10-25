@@ -1,5 +1,6 @@
 #Custom
 *.vs
+*.vcxproj
 *.VC.db
 *.suo
 *.user
@@ -7,7 +8,7 @@
 *.sln.docstates
 *.vsidx
 GLFWApplication/.vs
-GLFWApplication/.vs/GLFWApplication
+GLFWApplication/.vs/GLFWApplication/x64
 GLFWApplication/Dependencies/SDL/VisualC
 
 # Prerequisites

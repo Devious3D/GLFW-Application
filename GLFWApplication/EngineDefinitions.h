@@ -1,10 +1,21 @@
 #pragma once
 #if EngineDefinitions_h == 0
-#define EngineDefinitions_h
-
+#define EngineDefinitions_h 
 #include <iostream>
 
+
 namespace Engine {
+
+#include <stdint.h>
+
+	typedef int8_t int8;
+	typedef int16_t int16;
+	typedef int32_t int32;
+	typedef int64_t int64;
+	typedef uint8_t uint8;
+	typedef uint16_t uint16;
+	typedef uint32_t uint32;
+	typedef uint64_t uint64;
 
 	#define Bytes(n) (n)
 	#define Kilobytes(n) (1024 * Bytes(n))
@@ -12,19 +23,19 @@ namespace Engine {
 	#define Gigabytes(n) (1024 * Megabytes(n))
 
 	
-	void print(const char* msg) {
+	static void print(const char* msg) {
 		std::cout << msg << std::endl;
 	}
 
-	void print(int msg) {
+	static void print(int msg) {
 		std::cout << msg << std::endl;
 	}
 
-	void print(float msg) {
+	static void print(float msg) {
 		std::cout << msg << std::endl;
 	}
 
-	void print(double msg) {
+	static void print(double msg) {
 		std::cout << msg << std::endl;
 	}
 }

@@ -1,16 +1,26 @@
 #if Entry_cpp == 0
 #define Entry_cpp
 
-#include <iostream>
 #include <SDL3/SDL.h>
 #include <GLFW/glfw3.h>
 
 #include "Entry.h"
 #include "EngineDefinitions.h"
+#include "Memory.h"
 
 using namespace Engine;
 
 int main() {
+
+	engineMemory = new FEngine();
+
+	CMemoryHandler<int>* testHandle = new CMemoryHandler<int>;
+	testHandle->Init(Kilobytes(sizeof(int)), 5);
+
+
+	int stop = 100;
+	testHandle->Insert(stop);
+
 
 	CreateGlfwWindow();
 
@@ -39,6 +49,8 @@ void CreateGlfwWindow()
 
 		return;
 	}
+
+	print("Entry: Window is created");
 
 	glfwMakeContextCurrent(window);
 
