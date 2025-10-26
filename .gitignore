@@ -1,5 +1,5 @@
 #Custom
-*.vs
+
 *.vcxproj
 *.VC.db
 *.suo
@@ -10,7 +10,7 @@
 .vs
 GLFWApplication/.vs/GLFWApplication/x64
 GLFWApplication/Dependencies/SDL/VisualC
-
+GLFWApplication/.vs/GLFWApplication/v17/Browse.VC.db
 
 # Prerequisites
 *.d
