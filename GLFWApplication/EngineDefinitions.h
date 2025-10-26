@@ -28,6 +28,15 @@ namespace Engine {
 	#define Megabytes(n) (1024 * Kilobytes(n))
 	#define Gigabytes(n) (1024 * Megabytes(n))
 
+	static inline void ThrowError(const char* msg) {
+		std::cout << "(Error) | " << msg << std::endl;
+		return throw;
+	}
+
+	static void ThrowError(FString msg) {
+
+	}
+
 	static void print(FString msg) {
 
 	}

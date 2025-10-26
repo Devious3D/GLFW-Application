@@ -110,8 +110,8 @@ public:
 		//Update
 		
 		if (FMemoryHandle* targetHandle = this->Get(position)) {
-			memcpy(targetHandle->data, &data, this->maxMemoryHandleSize);
-			Engine::print(Engine::FString("Memory.h"));
+			std::memcpy(targetHandle->data, &data, this->maxMemoryHandleSize);
+			//Engine::print(Engine::FString("Memory.h"));
 		}
 
 		this->Update();
@@ -119,7 +119,8 @@ public:
 
 	virtual FMemoryHandle* Get(int position)
 	{
-		assert(position > this->maxElements);
+		//Engine::ThrowError("Memory_h: Hello World");
+		
 
 		FMemoryHandle* startingPoint = this->head;
 		if (startingPoint == nullptr) Engine::print("Memory(Get func): starting point is nullptr");

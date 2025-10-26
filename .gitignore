@@ -1,7 +1,7 @@
 #Custom
 
 *.vcxproj
-*.VC.db
+*.db
 *.suo
 *.user
 *.userosscache
