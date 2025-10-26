@@ -19,7 +19,7 @@ int main() {
 
 
 	int stop = 100;
-	testHandle->Insert(stop);
+	testHandle->Insert(stop, 4);
 
 
 	CreateGlfwWindow();

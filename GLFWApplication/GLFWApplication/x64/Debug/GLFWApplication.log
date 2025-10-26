@@ -1,7 +1,37 @@
 ﻿  Entry.cpp
-C:\Users\joe19\Documents\GitHub\GLFW-Application\GLFWApplication\Entry.h(5,7): warning C4099: 'GLFWwindow': type name first seen using 'struct' now seen using 'class'
+C:\Users\joe19\OneDrive\Documents\GitHub\GLFW-Application\GLFWApplication\Entry.h(5,7): warning C4099: 'GLFWwindow': type name first seen using 'struct' now seen using 'class'
   (compiling source file 'Entry.cpp')
-      C:\Users\joe19\Documents\GitHub\GLFW-Application\GLFWApplication\Dependencies\GLFW\include\GLFW\glfw3.h(1403,16):
+      C:\Users\joe19\OneDrive\Documents\GitHub\GLFW-Application\GLFWApplication\Dependencies\GLFW\include\GLFW\glfw3.h(1403,16):
       see declaration of 'GLFWwindow'
   
-  GLFWApplication.vcxproj -> C:\Users\joe19\Documents\GitHub\GLFW-Application\GLFWApplication\x64\Debug\GLFWApplication.exe
+C:\Users\joe19\OneDrive\Documents\GitHub\GLFW-Application\GLFWApplication\Memory.h(114,33): error C2440: '<function-style-cast>': cannot convert from 'const char [9]' to 'Engine::FString'
+  (compiling source file 'Entry.cpp')
+      C:\Users\joe19\OneDrive\Documents\GitHub\GLFW-Application\GLFWApplication\Memory.h(114,33):
+      'Engine::FString::FString': no overloaded function could convert all the argument types
+          C:\Users\joe19\OneDrive\Documents\GitHub\GLFW-Application\GLFWApplication\EngineDefinitions.h(21,32):
+          could be 'Engine::FString::FString(Engine::FString &&)'
+              C:\Users\joe19\OneDrive\Documents\GitHub\GLFW-Application\GLFWApplication\Memory.h(114,33):
+              'Engine::FString::FString(Engine::FString &&)': cannot convert argument 1 from 'const char [9]' to 'Engine::FString &&'
+                  C:\Users\joe19\OneDrive\Documents\GitHub\GLFW-Application\GLFWApplication\Memory.h(114,34):
+                  Reason: cannot convert from 'const char [9]' to 'Engine::FString'
+          C:\Users\joe19\OneDrive\Documents\GitHub\GLFW-Application\GLFWApplication\EngineDefinitions.h(21,32):
+          or       'Engine::FString::FString(const Engine::FString &)'
+              C:\Users\joe19\OneDrive\Documents\GitHub\GLFW-Application\GLFWApplication\Memory.h(114,33):
+              'Engine::FString::FString(const Engine::FString &)': cannot convert argument 1 from 'const char [9]' to 'const Engine::FString &'
+                  C:\Users\joe19\OneDrive\Documents\GitHub\GLFW-Application\GLFWApplication\Memory.h(114,34):
+                  Reason: cannot convert from 'const char [9]' to 'const Engine::FString'
+          C:\Users\joe19\OneDrive\Documents\GitHub\GLFW-Application\GLFWApplication\Memory.h(114,33):
+          while trying to match the argument list '(const char [9])'
+      C:\Users\joe19\OneDrive\Documents\GitHub\GLFW-Application\GLFWApplication\Memory.h(114,33):
+      the template instantiation context (the oldest one first) is
+          C:\Users\joe19\OneDrive\Documents\GitHub\GLFW-Application\GLFWApplication\Entry.cpp(17,40):
+          see reference to class template instantiation 'CMemoryHandler<int>' being compiled
+          C:\Users\joe19\OneDrive\Documents\GitHub\GLFW-Application\GLFWApplication\Memory.h(106,15):
+          while compiling class template member function 'void CMemoryHandler<int>::Insert(T,int)'
+          with
+          [
+              T=int
+          ]
+              C:\Users\joe19\OneDrive\Documents\GitHub\GLFW-Application\GLFWApplication\Entry.cpp(22,20):
+              see the first reference to 'CMemoryHandler<int>::Insert' in 'main'
+  

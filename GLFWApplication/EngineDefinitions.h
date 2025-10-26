@@ -7,6 +7,7 @@
 namespace Engine {
 
 #include <stdint.h>
+#include <cstring>
 
 	typedef int8_t int8;
 	typedef int16_t int16;
@@ -16,13 +17,21 @@ namespace Engine {
 	typedef uint16_t uint16;
 	typedef uint32_t uint32;
 	typedef uint64_t uint64;
+	
+	struct FString : std::string {
+
+	};
+
 
 	#define Bytes(n) (n)
 	#define Kilobytes(n) (1024 * Bytes(n))
 	#define Megabytes(n) (1024 * Kilobytes(n))
 	#define Gigabytes(n) (1024 * Megabytes(n))
 
-	
+	static void print(FString msg) {
+
+	}
+
 	static void print(const char* msg) {
 		std::cout << msg << std::endl;
 	}
