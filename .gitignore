@@ -7,9 +7,10 @@
 *.userosscache
 *.sln.docstates
 *.vsidx
-GLFWApplication/.vs
+.vs
 GLFWApplication/.vs/GLFWApplication/x64
 GLFWApplication/Dependencies/SDL/VisualC
+
 
 # Prerequisites
 *.d
@@ -53,4 +54,3 @@ GLFWApplication/Dependencies/SDL/VisualC
 # debug information files
 *.dwo
 
-GLFWApplication/.vs/GLFWApplication/v17/Browse.VC.db
