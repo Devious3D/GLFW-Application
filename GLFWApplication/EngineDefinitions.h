@@ -22,6 +22,9 @@ namespace Engine {
 
 	};
 
+	
+	#define cast static_cast
+	#define dynCast dynamic_cast
 
 	#define Bytes(n) (n)
 	#define Kilobytes(n) (1024 * Bytes(n))
@@ -31,14 +34,6 @@ namespace Engine {
 	static inline void ThrowError(const char* msg) {
 		std::cout << "(Error) | " << msg << std::endl;
 		return throw;
-	}
-
-	static void ThrowError(FString msg) {
-
-	}
-
-	static void print(FString msg) {
-
 	}
 
 	static void print(const char* msg) {

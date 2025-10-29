@@ -2,10 +2,10 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>C:\Users\joe19\Documents\GitHub\GLFW-Application\GLFWApplication\x64\Debug\SDL3.dll</FullPath>
+      <FullPath>C:\Users\joe19\OneDrive\Documents\GitHub\GLFW-Application\GLFWApplication\x64\Debug\SDL3.dll</FullPath>
     </ProjectOutput>
     <ProjectOutput>
-      <FullPath>C:\Users\joe19\Documents\GitHub\GLFW-Application\GLFWApplication\x64\Debug\GLFWApplication.exe</FullPath>
+      <FullPath>C:\Users\joe19\OneDrive\Documents\GitHub\GLFW-Application\GLFWApplication\x64\Debug\GLFWApplication.exe</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />

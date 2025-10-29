@@ -1,4 +1,4 @@
-#pragma once
+#pragma once  
 #if Memory_h == 0 
 #define Memory_h 1
 
@@ -39,22 +39,28 @@ private:
 		if (startingPoint == nullptr) { return; }
 		
 		int newestUsage = 0;
-		int newestElementcount = 0;
+		int positionCount = 0;
+		int newestActiveElementCount = 0;
 
 		for (;;) {
 
 			newestUsage += sizeof(startingPoint);
+			
+			//
+			if (startingPoint->data != nullptr) {
+				newestActiveElementCount++;
+			}
 
-			startingPoint->position = newestElementcount;
-			newestElementcount++;
+			startingPoint->position = positionCount;
+			positionCount++;
 
 
 			if (startingPoint->nextHandle == nullptr) break;
-			startingPoint = startingPoint->nextHandle;
+ 			startingPoint = startingPoint->nextHandle;
 		}
 
 		this->usage = newestUsage;
-		this->activeElements = newestElementcount;
+		this->activeElements = newestActiveElementCount;
 	}
 
 public:
@@ -68,6 +74,10 @@ public:
 		this->maxElements = maxEle;
 		this->maxElementDataSize = sizeof(T);
 		this->maxMemoryHandleSize = sizeof(FMemoryHandle) + this->maxElementDataSize;
+
+
+		//Change the handles to exsist on the stack
+		//Keep the data ptrs in the heap 
 
 		for (int i = 0; i < maxEle; i++) {
 
@@ -103,15 +113,13 @@ public:
 
 		this->Update();
 	}
-	virtual void Insert(T data, int position) {
-		assert((this->activeElements + 1) > this->maxElements);
-		//assert if the this next index is out of scope
-		//Copy the bytes in the handle
-		//Update
-		
+	virtual void Insert(T* data, int position) {
+		if (position + 1 > this->maxElements) {
+			Engine::ThrowError("Position out of scope");
+		}
+
 		if (FMemoryHandle* targetHandle = this->Get(position)) {
-			std::memcpy(targetHandle->data, &data, this->maxMemoryHandleSize);
-			//Engine::print(Engine::FString("Memory.h"));
+			targetHandle->data = data;
 		}
 
 		this->Update();
@@ -119,8 +127,9 @@ public:
 
 	virtual FMemoryHandle* Get(int position)
 	{
-		//Engine::ThrowError("Memory_h: Hello World");
-		
+		if (position + 1 > this->maxElements) {
+			Engine::ThrowError("Position out of scope");
+		}
 
 		FMemoryHandle* startingPoint = this->head;
 		if (startingPoint == nullptr) Engine::print("Memory(Get func): starting point is nullptr");
@@ -128,7 +137,6 @@ public:
 		for (;;) {
 
 			if (startingPoint->position == position) break;
-
 			startingPoint = startingPoint->nextHandle;
 		}
 
@@ -137,17 +145,38 @@ public:
 
 
 	virtual void Remove(int position) {
+		if (position + 1 > this->maxElements) {
+			Engine::ThrowError("Position out of scope");
+		}
 
+		FMemoryHandle* startingPoint = this->head;
+
+		for (;;) {
+			if (startingPoint->position == position) {
+				std::free(startingPoint->data);
+				break;
+			}
+
+			startingPoint = startingPoint->nextHandle;
+		}
 	}
 
 	inline T operator[](int position) {
+		if (position + 1 > this->maxElements) {
+			Engine::ThrowError("Position out of scope");
+		}
 
-		Engine::print(position);
-		return sizeof(T);
+		FMemoryHandle* targetHandle = this->Get(position);
+		if (targetHandle->data == nullptr) {
+			//Engine::ThrowError(("No data at position %s", position));
+		}
+		
+		
+		T* castedData = cast<T*>(targetHandle->data);
+
+		return *castedData;
 	}
 
 };
 
 #endif
-
-

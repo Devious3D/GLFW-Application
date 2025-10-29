@@ -17,12 +17,16 @@ int main() {
 	CMemoryHandler<int>* testHandle = new CMemoryHandler<int>;
 	testHandle->Init(Kilobytes(sizeof(int)), 5);
 
+	if (int *stopHere = new int(100)) {
+		testHandle->Insert(stopHere, 3);
+	}
 
-	int stop = 100;
-	testHandle->Insert(stop, 4);
-
+	int getInt = testHandle->operator[](3);
 
 	CreateGlfwWindow();
+
+	delete engineMemory;
+	delete testHandle;
 
 	return 0;
 }
@@ -46,6 +50,8 @@ void CreateGlfwWindow()
 	GLFWwindow* window = glfwCreateWindow(1000, 700, "Engine", NULL, NULL);
 
 	if (window == NULL) {
+
+		Engine::print("window is nullptr");
 
 		return;
 	}
