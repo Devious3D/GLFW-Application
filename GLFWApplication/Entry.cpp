@@ -5,34 +5,23 @@
 #include <GLFW/glfw3.h>
 
 #include "Entry.h"
-#include "EngineDefinitions.h"
 #include "Memory.h"
+#include "Input.h"
 
 using namespace Engine;
 
 int main() {
 
-	engineMemory = new FEngine();
-
-	CMemoryHandler<int>* testHandle = new CMemoryHandler<int>;
-	testHandle->Init(Kilobytes(sizeof(int)), 5);
-
-	if (int *stopHere = new int(100)) {
-		testHandle->Insert(stopHere, 3);
-	}
-
-	int getInt = testHandle->operator[](3);
-
+	engine = new FEngine;
+	
 	CreateGlfwWindow();
-
-	delete engineMemory;
-	delete testHandle;
 
 	return 0;
 }
 
 static void ProgramTick(float dt)
 {
+	
 }
 
 void CreateGlfwWindow()
@@ -44,12 +33,15 @@ void CreateGlfwWindow()
 
 	glfwSetErrorCallback(errorCallback);
 
-
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
-	GLFWwindow* window = glfwCreateWindow(1000, 700, "Engine", NULL, NULL);
+	
+	engine->MainWindow = glfwCreateWindow(engine->windowWidth, engine->windowHeight, "Engine", NULL, NULL);
 
-	if (window == NULL) {
+	glfwSetKeyCallback(engine->MainWindow, takeKeyboardInput);
+
+
+	if (engine->MainWindow == NULL) {
 
 		Engine::print("window is nullptr");
 
@@ -58,20 +50,20 @@ void CreateGlfwWindow()
 
 	print("Entry: Window is created");
 
-	glfwMakeContextCurrent(window);
+	glfwMakeContextCurrent(engine->MainWindow);
 
-	while (!glfwWindowShouldClose(window)) {
+	while (!glfwWindowShouldClose(engine->MainWindow)) {
 
 
 		ProgramTick(1.f);
 
-		glfwSwapBuffers(window);
+		glfwSwapBuffers(engine->MainWindow);
 		glfwSwapInterval(1);
 		glfwPollEvents();
 	}
 
 	glfwTerminate();
-	glfwDestroyWindow(window);
+	glfwDestroyWindow(engine->MainWindow);
 }
 
 void errorCallback(int error, const char* errordesc)
@@ -79,6 +71,9 @@ void errorCallback(int error, const char* errordesc)
 	fprintf(stderr, "Error %s\n", errordesc);
 
 }
+
+
+
 
 
 #endif

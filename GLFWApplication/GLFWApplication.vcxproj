@@ -144,10 +144,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Entry.cpp" />
+    <ClCompile Include="Input.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="EngineDefinitions.h" />
     <ClInclude Include="Entry.h" />
+    <ClInclude Include="Input.h" />
     <ClInclude Include="Memory.h" />
   </ItemGroup>
   <ItemGroup>

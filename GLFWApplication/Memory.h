@@ -23,8 +23,6 @@ private:
 	FMemoryHandle* head = nullptr;
 	FMemoryHandle* tail = nullptr;
 
-
-
 	int usage = 0;
 	int capacity = 0;
 	int maxElements = 0;
