@@ -1,11 +1,6 @@
-﻿  Input.cpp
-C:\Users\joe19\OneDrive\Documents\GitHub\GLFW-Application\GLFWApplication\Input.h(5,7): warning C4099: 'GLFWwindow': type name first seen using 'struct' now seen using 'class'
-  (compiling source file 'Input.cpp')
-      C:\Users\joe19\OneDrive\Documents\GitHub\GLFW-Application\GLFWApplication\Dependencies\GLFW\include\GLFW\glfw3.h(1403,16):
-      see declaration of 'GLFWwindow'
-  
-C:\Users\joe19\OneDrive\Documents\GitHub\GLFW-Application\GLFWApplication\Entry.h(6,7): warning C4099: 'GLFWwindow': type name first seen using 'struct' now seen using 'class'
-  (compiling source file 'Input.cpp')
+﻿  Entry.cpp
+C:\Users\joe19\OneDrive\Documents\GitHub\GLFW-Application\GLFWApplication\Entry.h(7,7): warning C4099: 'GLFWwindow': type name first seen using 'struct' now seen using 'class'
+  (compiling source file 'Entry.cpp')
       C:\Users\joe19\OneDrive\Documents\GitHub\GLFW-Application\GLFWApplication\Dependencies\GLFW\include\GLFW\glfw3.h(1403,16):
       see declaration of 'GLFWwindow'
   

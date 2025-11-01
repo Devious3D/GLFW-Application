@@ -21,7 +21,19 @@ int main() {
 
 static void ProgramTick(float dt)
 {
-	
+	if (engine == nullptr) return;
+	if (engine->MainWindow == nullptr) return;
+
+
+	if (getInputPressed(GLFW_KEY_ESCAPE)) {
+		glfwTerminate();
+		glfwDestroyWindow(engine->MainWindow);
+
+		delete engine;
+		engine = nullptr;
+
+		return;
+	}
 }
 
 void CreateGlfwWindow()
@@ -37,8 +49,6 @@ void CreateGlfwWindow()
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
 	
 	engine->MainWindow = glfwCreateWindow(engine->windowWidth, engine->windowHeight, "Engine", NULL, NULL);
-
-	glfwSetKeyCallback(engine->MainWindow, takeKeyboardInput);
 
 
 	if (engine->MainWindow == NULL) {
@@ -57,19 +67,27 @@ void CreateGlfwWindow()
 
 		ProgramTick(1.f);
 
+		if (engine == nullptr) break;
+
 		glfwSwapBuffers(engine->MainWindow);
 		glfwSwapInterval(1);
 		glfwPollEvents();
 	}
 
-	glfwTerminate();
-	glfwDestroyWindow(engine->MainWindow);
+	if (engine) {
+		glfwTerminate();
+		glfwDestroyWindow(engine->MainWindow);
+	}
 }
 
 void errorCallback(int error, const char* errordesc)
 {
-	fprintf(stderr, "Error %s\n", errordesc);
+	for (int i = 0; i < glfwErrorsToIgnore.size(); i++) {
+		if (error == glfwErrorsToIgnore[i]) continue;
 
+		fprintf(stderr, "Error %s\n", errordesc);
+		break;
+	}
 }
 
 

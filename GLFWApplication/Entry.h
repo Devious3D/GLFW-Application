@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include <stdint.h>
 #include <vector>
 
 class GLFWwindow;
@@ -9,6 +10,17 @@ struct InputEvent;
 
 namespace Engine {
 
+	#define cast static_cast
+	#define dynCast dynamic_cast
+
+	#define Bytes(n) (n)
+	#define Kilobytes(n) (1024 * Bytes(n))
+	#define Megabytes(n) (1024 * Kilobytes(n))
+	#define Gigabytes(n) (1024 * Megabytes(n))
+
+	static std::vector<int> glfwErrorsToIgnore = {
+		65539
+	};
 
 	struct Vector2 {
 
@@ -23,18 +35,9 @@ namespace Engine {
 		const int windowWidth = 1000;
 		const int windowHeight = 700;
 		GLFWwindow* MainWindow = nullptr;
-
-		std::vector<InputEvent> inputEvents;
 	};
 
 
-#define cast static_cast
-#define dynCast dynamic_cast
-
-#define Bytes(n) (n)
-#define Kilobytes(n) (1024 * Bytes(n))
-#define Megabytes(n) (1024 * Kilobytes(n))
-#define Gigabytes(n) (1024 * Megabytes(n))
 
 	static inline void ThrowError(const char* msg) {
 		std::cout << "(Error) | " << msg << std::endl;
