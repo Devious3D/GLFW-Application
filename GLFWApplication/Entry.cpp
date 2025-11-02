@@ -3,6 +3,7 @@
 
 #include <SDL3/SDL.h>
 #include <GLFW/glfw3.h>
+#include <string>
 
 #include "Entry.h"
 #include "Memory.h"
@@ -11,9 +12,13 @@
 using namespace Engine;
 
 int main() {
+	using namespace std;
 
 	engine = new FEngine;
-	
+	client = new Client;
+
+
+
 	CreateGlfwWindow();
 
 	return 0;
@@ -34,13 +39,24 @@ static void ProgramTick(float dt)
 
 		return;
 	}
+
+	
+	if (client != nullptr) {
+
+		glfwGetCursorPos(glfwGetCurrentContext(), &client->mousePos.x, &client->mousePos.y);
+
+		/*print( 
+			std::string("X: ") + std::to_string(client->mousePos.x) 
+			+ std::string(" Y: ") + std::to_string(client->mousePos.y)
+		);*/
+	}
+
 }
 
 void CreateGlfwWindow()
 {
 
 	if (!glfwInit()) {
-		print("glfw lib uninitialized");
 	}
 
 	glfwSetErrorCallback(errorCallback);
@@ -58,7 +74,7 @@ void CreateGlfwWindow()
 		return;
 	}
 
-	print("Entry: Window is created");
+	//print("Entry: Window is created");
 
 	glfwMakeContextCurrent(engine->MainWindow);
 
