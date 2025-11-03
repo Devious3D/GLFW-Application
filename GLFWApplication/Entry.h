@@ -3,12 +3,17 @@
 #define IsSinglePlayer 1
 #define IsMultiplayer 1
 
+
+
 #include <iostream>
 #include <stdint.h>
 #include <vector>
+#include <string>
 
-class GLFWwindow;
+
+class GLFWwindow; 
 struct InputEvent;
+
 
 namespace Engine {
 
@@ -33,12 +38,27 @@ namespace Engine {
 	struct Vector2 {
 		double x = 0.f;
 		double y = 0.f;
+
+		std::string tostring() {
+			using namespace std;
+
+			return string("X: ") + to_string(x) 
+				+ string(" Y: ") + to_string(y);
+		}
 	};
 
 	struct Vector3 {
 		float x = 0.f;
 		float y = 0.f;
 		float z = 0.f;
+
+		std::string tostring() {
+			using namespace std;
+
+			return string("X: ") + to_string(x)
+				+ string(" Y: ") + to_string(y)
+				+ string(" Z: ") + to_string(z);
+		}
 	};
 
 	struct FEngine {
@@ -50,6 +70,7 @@ namespace Engine {
 
 	struct Client {
 		Vector2 mousePos;
+		int FPS = 0;
 	};
 
 	static inline void ThrowError(std::string msg) {
@@ -72,5 +93,5 @@ static Engine::Client* client = nullptr;
 
 
 static void ProgramTick(float dt);
-static void CreateGlfwWindow();
+static void CreateGlfwWindow(const char* WindowName, const int windowWidth, const int windowHeight);
 static void errorCallback(int error, const char* errordesc);

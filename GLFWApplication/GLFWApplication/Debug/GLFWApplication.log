@@ -1,0 +1,19 @@
+﻿LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
+Entry.obj : error LNK2019: unresolved external symbol _glfwInit referenced in function _main
+Entry.obj : error LNK2019: unresolved external symbol _glfwTerminate referenced in function "void __cdecl CreateGlfwWindow(char const *,int,int)" (?CreateGlfwWindow@@YAXPBDHH@Z)
+Entry.obj : error LNK2019: unresolved external symbol _glfwSetErrorCallback referenced in function "void __cdecl CreateGlfwWindow(char const *,int,int)" (?CreateGlfwWindow@@YAXPBDHH@Z)
+Entry.obj : error LNK2019: unresolved external symbol _glfwWindowHint referenced in function "void __cdecl CreateGlfwWindow(char const *,int,int)" (?CreateGlfwWindow@@YAXPBDHH@Z)
+Entry.obj : error LNK2019: unresolved external symbol _glfwCreateWindow referenced in function "void __cdecl CreateGlfwWindow(char const *,int,int)" (?CreateGlfwWindow@@YAXPBDHH@Z)
+Entry.obj : error LNK2019: unresolved external symbol _glfwDestroyWindow referenced in function "void __cdecl CreateGlfwWindow(char const *,int,int)" (?CreateGlfwWindow@@YAXPBDHH@Z)
+Entry.obj : error LNK2019: unresolved external symbol _glfwWindowShouldClose referenced in function "void __cdecl CreateGlfwWindow(char const *,int,int)" (?CreateGlfwWindow@@YAXPBDHH@Z)
+Entry.obj : error LNK2019: unresolved external symbol _glfwPollEvents referenced in function "void __cdecl CreateGlfwWindow(char const *,int,int)" (?CreateGlfwWindow@@YAXPBDHH@Z)
+Entry.obj : error LNK2019: unresolved external symbol _glfwGetCursorPos referenced in function "void __cdecl ProgramTick(float)" (?ProgramTick@@YAXM@Z)
+Entry.obj : error LNK2019: unresolved external symbol _glfwMakeContextCurrent referenced in function "void __cdecl CreateGlfwWindow(char const *,int,int)" (?CreateGlfwWindow@@YAXPBDHH@Z)
+Entry.obj : error LNK2019: unresolved external symbol _glfwGetCurrentContext referenced in function "void __cdecl ProgramTick(float)" (?ProgramTick@@YAXM@Z)
+Input.obj : error LNK2001: unresolved external symbol _glfwGetCurrentContext
+Entry.obj : error LNK2019: unresolved external symbol _glfwSwapBuffers referenced in function "void __cdecl CreateGlfwWindow(char const *,int,int)" (?CreateGlfwWindow@@YAXPBDHH@Z)
+Entry.obj : error LNK2019: unresolved external symbol _glfwSwapInterval referenced in function "void __cdecl CreateGlfwWindow(char const *,int,int)" (?CreateGlfwWindow@@YAXPBDHH@Z)
+Input.obj : error LNK2019: unresolved external symbol _glfwGetKey referenced in function "bool __cdecl getInputPressed(int)" (?getInputPressed@@YA_NH@Z)
+Input.obj : error LNK2019: unresolved external symbol _glfwGetMouseButton referenced in function "bool __cdecl getInputPressed(int)" (?getInputPressed@@YA_NH@Z)
+C:\Users\joe19\Documents\GitHub\GLFW-Application\GLFWApplication\Dependencies\GLFW\lib-vc2022\glfw3.lib : warning LNK4272: library machine type 'x64' conflicts with target machine type 'x86'
+C:\Users\joe19\Documents\GitHub\GLFW-Application\GLFWApplication\Debug\GLFWApplication.exe : fatal error LNK1120: 15 unresolved externals

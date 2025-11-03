@@ -1,28 +1,35 @@
 #if Entry_cpp == 0
-#define Entry_cpp
+#define Entry_cpp 1
 
-#include <SDL3/SDL.h>
+
+#include <GL/glew.h>
+#include <GL/GLU.h>
 #include <GLFW/glfw3.h>
-#include <string>
 
 #include "Entry.h"
 #include "Memory.h"
 #include "Input.h"
+#include "Rendering.h"
 
 using namespace Engine;
 
 int main() {
 	using namespace std;
 
+	if (!glfwInit()) {
+		ThrowError(string("GLFW failed to init"));
+		return -1;
+	}
+
+
 	engine = new FEngine;
 	client = new Client;
 
-
-
-	CreateGlfwWindow();
+	CreateGlfwWindow("Engine", engine->windowWidth, engine->windowHeight);
 
 	return 0;
 }
+
 
 static void ProgramTick(float dt)
 {
@@ -40,46 +47,50 @@ static void ProgramTick(float dt)
 		return;
 	}
 
-	
 	if (client != nullptr) {
 
 		glfwGetCursorPos(glfwGetCurrentContext(), &client->mousePos.x, &client->mousePos.y);
-
-		/*print( 
-			std::string("X: ") + std::to_string(client->mousePos.x) 
-			+ std::string(" Y: ") + std::to_string(client->mousePos.y)
-		);*/
 	}
 
+	//Main Processes
+	MainRender(dt);
 }
 
-void CreateGlfwWindow()
-{
 
-	if (!glfwInit()) {
-	}
+void CreateGlfwWindow(const char* WindowName, const int windowWidth, const int windowHeight)
+{
+	using namespace std;
 
 	glfwSetErrorCallback(errorCallback);
 
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
 	
-	engine->MainWindow = glfwCreateWindow(engine->windowWidth, engine->windowHeight, "Engine", NULL, NULL);
+	engine->MainWindow = glfwCreateWindow(windowWidth, windowHeight, WindowName, NULL, NULL);
 
 
 	if (engine->MainWindow == NULL) {
 
-		Engine::print("window is nullptr");
+		print("window is nullptr");
 
 		return;
 	}
 
-	//print("Entry: Window is created");
+	print(string(WindowName) + string(" window is Created"));
 
 	glfwMakeContextCurrent(engine->MainWindow);
 
-	while (!glfwWindowShouldClose(engine->MainWindow)) {
 
+	if (glewInit() != GLEW_OK) 
+	{
+		ThrowError(string("(Entry): GLEW failed to load"));
+	}
+	else
+	{
+		print(string("(Entry): GLEW is loaded"));
+	}
+	
+	while (!glfwWindowShouldClose(engine->MainWindow)) {
 
 		ProgramTick(1.f);
 
@@ -96,6 +107,7 @@ void CreateGlfwWindow()
 	}
 }
 
+
 void errorCallback(int error, const char* errordesc)
 {
 	for (int i = 0; i < glfwErrorsToIgnore.size(); i++) {
@@ -105,9 +117,5 @@ void errorCallback(int error, const char* errordesc)
 		break;
 	}
 }
-
-
-
-
 
 #endif
