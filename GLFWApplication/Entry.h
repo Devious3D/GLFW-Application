@@ -3,17 +3,12 @@
 #define IsSinglePlayer 1
 #define IsMultiplayer 1
 
-
-
 #include <iostream>
 #include <stdint.h>
 #include <vector>
 #include <string>
 
-
-class GLFWwindow; 
-struct InputEvent;
-
+class GLFWwindow;
 
 namespace Engine {
 
@@ -29,6 +24,7 @@ namespace Engine {
 	struct Vector2;
 	struct Vector3;
 	struct FEngine;
+
 
 
 	static const std::vector<int> glfwErrorsToIgnore = {
@@ -63,9 +59,10 @@ namespace Engine {
 
 	struct FEngine {
 
+		GLFWwindow* MainWindow = nullptr;
 		const int windowWidth = 1000;
 		const int windowHeight = 700;
-		GLFWwindow* MainWindow = nullptr;
+		float deltatime = 0.f;
 	};
 
 	struct Client {

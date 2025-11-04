@@ -3,8 +3,8 @@
 
 
 #include <GL/glew.h>
-#include <GL/GLU.h>
 #include <GLFW/glfw3.h>
+#include <chrono>
 
 #include "Entry.h"
 #include "Memory.h"
@@ -23,7 +23,7 @@ int main() {
 
 
 	engine = new FEngine;
-	client = new Client;
+	client = new Client; 
 
 	CreateGlfwWindow("Engine", engine->windowWidth, engine->windowHeight);
 
@@ -89,8 +89,13 @@ void CreateGlfwWindow(const char* WindowName, const int windowWidth, const int w
 	{
 		print(string("(Entry): GLEW is loaded"));
 	}
+
+	auto currentTime = chrono::steady_clock::now();
+	auto previousTime = currentTime;
 	
 	while (!glfwWindowShouldClose(engine->MainWindow)) {
+
+		currentTime = chrono::steady_clock::now();
 
 		ProgramTick(1.f);
 
@@ -99,6 +104,11 @@ void CreateGlfwWindow(const char* WindowName, const int windowWidth, const int w
 		glfwSwapBuffers(engine->MainWindow);
 		glfwSwapInterval(1);
 		glfwPollEvents();
+
+		engine->deltatime = chrono::duration<float, std::milli>(previousTime - currentTime).count();
+		previousTime = currentTime;
+
+		print(to_string(engine->deltatime));
 	}
 
 	if (engine) {
@@ -113,7 +123,7 @@ void errorCallback(int error, const char* errordesc)
 	for (int i = 0; i < glfwErrorsToIgnore.size(); i++) {
 		if (error == glfwErrorsToIgnore[i]) continue;
 
-		fprintf(stderr, "Error %s\n", errordesc);
+		ThrowError(errordesc);
 		break;
 	}
 }
