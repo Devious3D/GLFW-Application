@@ -1,6 +1,6 @@
 #pragma once
 #ifndef Rendering_h
-#define Rendering_h 
+#define Rendering_h 1
 
 
 struct Triangle {

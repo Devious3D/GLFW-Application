@@ -3,29 +3,44 @@
 #define Timer_h 1
 
 
-enum class TimerState {
+enum class ETimerState {
 	None,
 	Paused,
 	Ticking,
 };
 
-enum class TimerType {
+
+enum class ETimerType {
 	TickUp,
 	TickDown,
-	Repeating,
 };
 
-struct Timer {
-	signed int currentTime;
-	signed int startingTime;
-	unsigned int TargetTime;
-	unsigned int id;
-	signed int normalizedTime;
-
-	TimerState state;
-	TimerType type;
+enum class ETimerActionOnCompletion {
+	Destroy,
+	Repeat
 };
 
-static void newTimer(unsigned int startingTime, unsigned int targetTime, TimerType type);
+struct FTimer {
+	ETimerState state;
+	ETimerType type;
+	ETimerActionOnCompletion actionOnComplete;
+
+	float currentTime;
+	float startingTime;
+	float TargetTime;
+	float normalizedTime;
+
+	void(*onTickFunc)();
+};
+
+FTimer* newTimer(
+	 float startingTime,
+	 float targetTime,
+
+	ETimerType type,
+	ETimerActionOnCompletion actionOnComplete
+);
+
+void HandleTimers(float dt);
 
 #endif

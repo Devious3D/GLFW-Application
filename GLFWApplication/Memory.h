@@ -9,7 +9,7 @@ struct vector;
 
 struct FMemoryHandle {
 
-	int position;
+	int position = 0;
 	void* data = nullptr;
 	FMemoryHandle* nextHandle = nullptr;
 };

@@ -1,4 +1,4 @@
-#if Rendering_cpp == 0
+#ifndef Rendering_cpp
 #define Rendering_cpp 1
 
 #include <GL/glew.h>
@@ -11,9 +11,9 @@ using namespace Engine;
 
 void MainRender(float dt)
 {
-
-
-
+	//if (FEngine* Engine = GetEngine()) {
+	//	print(std::to_string(Engine->deltatime));
+	//}
 }
 
 

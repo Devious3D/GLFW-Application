@@ -5,25 +5,34 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <chrono>
+#include <thread>
 
 #include "Entry.h"
 #include "Memory.h"
 #include "Input.h"
 #include "Rendering.h"
+#include "Timer.h"
 
 using namespace Engine;
 
 int main() {
 	using namespace std;
 
-	if (!glfwInit()) {
-		ThrowError(string("GLFW failed to init"));
+	if (!glfwInit()) 
+	{
+		ThrowError("GLFW failed to init");
 		return -1;
+	}
+	else
+	{
+		print("GLFW is Loaded");
 	}
 
 
 	engine = new FEngine;
-	client = new Client; 
+	client = new FClient; 
+
+	FTimer* timer = newTimer(1, 0, ETimerType::TickDown, ETimerActionOnCompletion::Repeat);
 
 	CreateGlfwWindow("Engine", engine->windowWidth, engine->windowHeight);
 
@@ -36,24 +45,28 @@ static void ProgramTick(float dt)
 	if (engine == nullptr) return;
 	if (engine->MainWindow == nullptr) return;
 
+	{
+		if (getInputPressed(GLFW_KEY_ESCAPE)) {
+			glfwTerminate();
+			glfwDestroyWindow(engine->MainWindow);
 
-	if (getInputPressed(GLFW_KEY_ESCAPE)) {
-		glfwTerminate();
-		glfwDestroyWindow(engine->MainWindow);
+			delete engine;
+			delete client;
 
-		delete engine;
-		engine = nullptr;
+			return;
+		}
 
-		return;
-	}
+		if (client != nullptr) {
 
-	if (client != nullptr) {
-
-		glfwGetCursorPos(glfwGetCurrentContext(), &client->mousePos.x, &client->mousePos.y);
+			glfwGetCursorPos(glfwGetCurrentContext(), &client->mousePos.x, &client->mousePos.y);
+		}
 	}
 
 	//Main Processes
-	MainRender(dt);
+	{
+		MainRender(dt);
+		HandleTimers(dt);
+	}
 }
 
 
@@ -90,14 +103,14 @@ void CreateGlfwWindow(const char* WindowName, const int windowWidth, const int w
 		print(string("(Entry): GLEW is loaded"));
 	}
 
-	auto currentTime = chrono::steady_clock::now();
+	auto currentTime = chrono::high_resolution_clock::now();
 	auto previousTime = currentTime;
 	
 	while (!glfwWindowShouldClose(engine->MainWindow)) {
 
-		currentTime = chrono::steady_clock::now();
+		currentTime = chrono::high_resolution_clock::now();
 
-		ProgramTick(1.f);
+		ProgramTick(engine->deltatime);
 
 		if (engine == nullptr) break;
 
@@ -105,10 +118,8 @@ void CreateGlfwWindow(const char* WindowName, const int windowWidth, const int w
 		glfwSwapInterval(1);
 		glfwPollEvents();
 
-		engine->deltatime = chrono::duration<float, std::milli>(previousTime - currentTime).count();
+		engine->deltatime = -(chrono::duration<float>(previousTime - currentTime).count());
 		previousTime = currentTime;
-
-		print(to_string(engine->deltatime));
 	}
 
 	if (engine) {
@@ -122,10 +133,20 @@ void errorCallback(int error, const char* errordesc)
 {
 	for (int i = 0; i < glfwErrorsToIgnore.size(); i++) {
 		if (error == glfwErrorsToIgnore[i]) continue;
-
+		
 		ThrowError(errordesc);
 		break;
 	}
+}
+
+Engine::FEngine* GetEngine()
+{
+	return engine;
+}
+
+Engine::FClient* GetClient()
+{
+	return client;
 }
 
 #endif
