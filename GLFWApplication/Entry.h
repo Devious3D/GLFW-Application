@@ -85,13 +85,6 @@ namespace Engine {
 }
 
 
-static Engine::FEngine* engine;
-
-#if IsSinglePlayer
-static Engine::FClient* client;
-#endif
-
-
 static void ProgramTick(float dt);
 static void CreateGlfwWindow(const char* WindowName, const int windowWidth, const int windowHeight);
 static void errorCallback(int error, const char* errordesc);

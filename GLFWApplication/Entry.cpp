@@ -15,6 +15,12 @@
 
 using namespace Engine;
 
+Engine::FEngine* engine;
+
+#if IsSinglePlayer
+Engine::FClient* client;
+#endif
+
 int main() {
 	using namespace std;
 

@@ -1,2 +1,15 @@
-﻿  Timer.cpp
-  GLFWApplication.vcxproj -> C:\Users\joe19\Documents\GitHub\GLFW-Application\GLFWApplication\x64\Debug\GLFWApplication.exe
+﻿  Entry.cpp
+C:\Users\joe19\OneDrive\Documents\GitHub\GLFW-Application\GLFWApplication\Entry.h(14,7): warning C4099: 'GLFWwindow': type name first seen using 'struct' now seen using 'class'
+  (compiling source file 'Entry.cpp')
+      C:\Users\joe19\OneDrive\Documents\GitHub\GLFW-Application\GLFWApplication\Dependencies\GLFW\include\GLFW\glfw3.h(1403,16):
+      see declaration of 'GLFWwindow'
+  
+  Rendering.cpp
+C:\Users\joe19\OneDrive\Documents\GitHub\GLFW-Application\GLFWApplication\Entry.h(14,7): warning C4099: 'GLFWwindow': type name first seen using 'struct' now seen using 'class'
+  (compiling source file 'Rendering.cpp')
+      C:\Users\joe19\OneDrive\Documents\GitHub\GLFW-Application\GLFWApplication\Dependencies\GLFW\include\GLFW\glfw3.h(1403,16):
+      see declaration of 'GLFWwindow'
+  
+  Timer.cpp
+  Generating Code...
+  GLFWApplication.vcxproj -> C:\Users\joe19\OneDrive\Documents\GitHub\GLFW-Application\GLFWApplication\x64\Debug\GLFWApplication.exe

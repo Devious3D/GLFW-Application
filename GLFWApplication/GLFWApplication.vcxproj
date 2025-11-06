@@ -148,12 +148,18 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Entry.cpp" />
+    <ClCompile Include="imgui.cpp" />
+    <ClCompile Include="imgui_impl_glfw.cpp" />
+    <ClCompile Include="imgui_impl_opengl2.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="Rendering.cpp" />
     <ClCompile Include="Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entry.h" />
+    <ClInclude Include="imgui.h" />
+    <ClInclude Include="imgui_impl_glfw.h" />
+    <ClInclude Include="imgui_impl_opengl2.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Memory.h" />
     <ClInclude Include="Rendering.h" />
