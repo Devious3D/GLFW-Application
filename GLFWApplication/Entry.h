@@ -3,7 +3,7 @@
 #define Entry_h
 
 #define IsSinglePlayer 1
-#define IsMultiplayer 1
+#define IsMultiplayer 0
 
 #include <iostream>
 #include <vector>
@@ -60,13 +60,14 @@ namespace Engine {
 
 	struct FEngine {
 
+	public:
 		GLFWwindow* MainWindow = nullptr;
-
 		std::vector<FTimer*> activeTimers;
 
 		const int windowWidth = 1000;
 		const int windowHeight = 700;
 		float deltatime = 0.f;
+		bool inputsLocked = false;
 	};
 
 	struct FClient {
@@ -85,7 +86,7 @@ namespace Engine {
 }
 
 
-static void ProgramTick(float dt);
+static bool ProgramTick(float dt);
 static void CreateGlfwWindow(const char* WindowName, const int windowWidth, const int windowHeight);
 static void errorCallback(int error, const char* errordesc);
 Engine::FEngine* GetEngine();

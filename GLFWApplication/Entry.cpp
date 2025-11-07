@@ -13,6 +13,10 @@
 #include "Rendering.h"
 #include "Timer.h"
 
+#include "ImGui\imgui.h"
+#include "ImGui\imgui_impl_glfw.h"
+#include "ImGui\imgui_impl_opengl3.h"
+
 using namespace Engine;
 
 Engine::FEngine* engine;
@@ -46,20 +50,12 @@ int main() {
 }
 
 
-static void ProgramTick(float dt)
+static bool ProgramTick(float dt)
 {
-	if (engine == nullptr) return;
-	if (engine->MainWindow == nullptr) return;
 
 	{
 		if (getInputPressed(GLFW_KEY_ESCAPE)) {
-			glfwTerminate();
-			glfwDestroyWindow(engine->MainWindow);
-
-			delete engine;
-			delete client;
-
-			return;
+			return true;
 		}
 
 		if (client != nullptr) {
@@ -70,68 +66,104 @@ static void ProgramTick(float dt)
 
 	//Main Processes
 	{
-		MainRender(dt);
 		HandleTimers(dt);
+		MainRender(dt);
 	}
+
+	return false;
 }
 
 
 void CreateGlfwWindow(const char* WindowName, const int windowWidth, const int windowHeight)
 {
-	using namespace std;
 
 	glfwSetErrorCallback(errorCallback);
 
+	IMGUI_CHECKVERSION();
+	ImGui::CreateContext();
+	ImGuiIO& imGuiIo = ImGui::GetIO();
+	imGuiIo.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
+	imGuiIo.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;
+	imGuiIo.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
+
+
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
-	
 	engine->MainWindow = glfwCreateWindow(windowWidth, windowHeight, WindowName, NULL, NULL);
 
-
 	if (engine->MainWindow == NULL) {
-
-		print("window is nullptr");
-
+		ThrowError("window is nullptr");
 		return;
 	}
 
-	print(string(WindowName) + string(" window is Created"));
-
 	glfwMakeContextCurrent(engine->MainWindow);
 
+	if (glewInit() != GLEW_OK) ThrowError(std::string("(Entry): GLEW failed to load"));
+	else print(std::string("(Entry): GLEW is loaded"));
 
-	if (glewInit() != GLEW_OK) 
-	{
-		ThrowError(string("(Entry): GLEW failed to load"));
-	}
-	else
-	{
-		print(string("(Entry): GLEW is loaded"));
-	}
+	print(std::string(WindowName) + std::string(" window is Created"));
 
-	auto currentTime = chrono::high_resolution_clock::now();
+
+	ImGui::StyleColorsClassic();
+	ImGui_ImplGlfw_InitForOpenGL(engine->MainWindow, true);
+	ImGui_ImplOpenGL3_Init();
+
+
+	auto currentTime = std::chrono::high_resolution_clock::now();
 	auto previousTime = currentTime;
 	
 	while (!glfwWindowShouldClose(engine->MainWindow)) {
 
-		currentTime = chrono::high_resolution_clock::now();
+		currentTime = std::chrono::high_resolution_clock::now();
 
-		ProgramTick(engine->deltatime);
+		//#1
+		glClear(GL_COLOR_BUFFER_BIT);
 
-		if (engine == nullptr) break;
+		if (imGuiIo.WantCaptureMouse) engine->inputsLocked = true;
+		else engine->inputsLocked = false;
 
+		ImGui_ImplOpenGL3_NewFrame();
+		ImGui_ImplGlfw_NewFrame();
+		ImGui::NewFrame();
+
+		//#2
+		//Ui Should be able to render at this point
+		bool shouldClose = ProgramTick(engine->deltatime);
+		if (shouldClose) break;
+
+		ImGui::Begin("Engine Panel");
+		
+		if (ImGui::CollapsingHeader("Information")) {
+				
+			ImGui::BulletText((std::string("Mouse Pos: ") + client->mousePos.tostring()).c_str());
+
+		}
+
+		ImGui::End();
+		
+
+		ImGui::Render();
+		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
+		//#3
+		glfwPollEvents();
 		glfwSwapBuffers(engine->MainWindow);
 		glfwSwapInterval(1);
-		glfwPollEvents();
 
-		engine->deltatime = -(chrono::duration<float>(previousTime - currentTime).count());
+		engine->deltatime = -(std::chrono::duration<float>(previousTime - currentTime).count());
 		previousTime = currentTime;
 	}
 
-	if (engine) {
-		glfwTerminate();
-		glfwDestroyWindow(engine->MainWindow);
-	}
+	ImGui_ImplOpenGL3_Shutdown();
+	ImGui_ImplGlfw_Shutdown();
+	ImGui::DestroyContext();
+
+
+	glfwTerminate();
+	glfwDestroyWindow(engine->MainWindow);
+
+	delete engine;
+	delete client;
 }
 
 
@@ -154,5 +186,6 @@ Engine::FClient* GetClient()
 {
 	return client;
 }
+
 
 #endif

@@ -4,6 +4,9 @@
 #include <GLFW/glfw3.h>
 
 #include "Input.h"
+#include "Entry.h"
+
+#include "ImGui\imgui.h"
 
 
 /*
@@ -12,10 +15,13 @@
 bool getInputPressed(int key)
 {
 	bool pressed = false;
+	if (Engine::FEngine* Engine = GetEngine()) {
+		if (Engine->inputsLocked) return false;
 
-	if (GLFWwindow* currentWindow = glfwGetCurrentContext()) {
-		if (glfwGetKey(currentWindow, key) == GLFW_PRESS) pressed = true;
-		if (glfwGetMouseButton(currentWindow, key) == GLFW_PRESS) pressed = true;
+		if (GLFWwindow* currentWindow = glfwGetCurrentContext()) {
+			if (glfwGetKey(currentWindow, key) == GLFW_PRESS) pressed = true;
+			if (glfwGetMouseButton(currentWindow, key) == GLFW_PRESS) pressed = true;
+		}
 	}
 
 	return pressed;
@@ -28,10 +34,15 @@ bool getKeyEnded(int key)
 {
 	bool Ended = false;
 
-	if (GLFWwindow* currentWindow = glfwGetCurrentContext()) {
-		if (glfwGetKey(currentWindow, key) == GLFW_PRESS) Ended = true;
-		if (glfwGetMouseButton(currentWindow, key)) Ended = true;
+	if (Engine::FEngine* Engine = GetEngine()) {
+		if (Engine->inputsLocked) return false;
 
+		if (GLFWwindow* currentWindow = glfwGetCurrentContext()) {
+			if (glfwGetKey(currentWindow, key) == GLFW_PRESS) Ended = true;
+			if (glfwGetMouseButton(currentWindow, key)) Ended = true;
+
+		}
+		
 	}
 
 	return Ended;
@@ -41,9 +52,13 @@ bool getKeyHeld(int key)
 {
 	bool held = false;
 
-	if (GLFWwindow* currentWindow = glfwGetCurrentContext()) {
-		if (glfwGetKey(currentWindow, key) == GLFW_REPEAT) held = true;
-		if (glfwGetMouseButton(currentWindow, key)) held = true;
+	if (Engine::FEngine* Engine = GetEngine()) {
+		if (Engine->inputsLocked) return false;
+
+		if (GLFWwindow* currentWindow = glfwGetCurrentContext()) {
+			if (glfwGetKey(currentWindow, key) == GLFW_REPEAT) held = true;
+			if (glfwGetMouseButton(currentWindow, key)) held = true;
+		}
 	}
 
 	return held;
