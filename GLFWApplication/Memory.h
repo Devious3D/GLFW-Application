@@ -4,6 +4,8 @@
 
 #include <cassert>
 
+#include "EngineDefinitions.h"
+
 template<typename t>
 struct vector;
 
@@ -170,7 +172,7 @@ public:
 		}
 		
 		
-		T* castedData = cast<T*>(targetHandle->data);
+		T* castedData = static_cast<T*>(targetHandle->data);
 
 		return *castedData;
 	}

@@ -2,26 +2,20 @@
 #ifndef Entry_h 
 #define Entry_h
 
-#define IsSinglePlayer 1
-#define IsMultiplayer 0
-
 #include <iostream>
 #include <vector>
 #include <string>
 
 
+#define DEFAULT_WINDOW_WIDTH 1000
+#define DEFAULT_WINDOW_HEIGHT 700
+#define ENGINE_VERSION_MAJOR 0
+#define ENGINE_VERSION_MINOR 0
+
 struct FTimer;
 class GLFWwindow;
 
 namespace Engine {
-
-#define cast static_cast
-#define dynCast dynamic_cast
-
-#define Bytes(n) (n)
-#define Kilobytes(n) (1024 * Bytes(n))
-#define Megabytes(n) (1024 * Kilobytes(n))
-#define Gigabytes(n) (1024 * Megabytes(n))
 
 	struct Client;
 	struct Vector2;
@@ -64,8 +58,7 @@ namespace Engine {
 		GLFWwindow* MainWindow = nullptr;
 		std::vector<FTimer*> activeTimers;
 
-		const int windowWidth = 1000;
-		const int windowHeight = 700;
+		
 		float deltatime = 0.f;
 		bool inputsLocked = false;
 	};
@@ -87,7 +80,13 @@ namespace Engine {
 
 
 static bool ProgramTick(float dt);
-static void CreateGlfwWindow(const char* WindowName, const int windowWidth, const int windowHeight);
+static void CreateGlfwWindow(
+	const char* WindowName, 
+	const int windowWidth,
+	const int windowHeight,
+	void(*callbackfun)()
+);
+
 static void errorCallback(int error, const char* errordesc);
 Engine::FEngine* GetEngine();
 Engine::FClient* GetClient();

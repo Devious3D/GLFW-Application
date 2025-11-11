@@ -7,15 +7,21 @@
 #include <chrono>
 #include <thread>
 
+#include "ImGui\imgui.h"
+#include "ImGui\imgui_impl_glfw.h"
+#include "ImGui\imgui_impl_opengl3.h"
+
 #include "Entry.h"
 #include "Memory.h"
 #include "Input.h"
 #include "Rendering.h"
 #include "Timer.h"
+#include "UI.h"
 
-#include "ImGui\imgui.h"
-#include "ImGui\imgui_impl_glfw.h"
-#include "ImGui\imgui_impl_opengl3.h"
+#include  "EngineDefinitions.h"
+#include "EngineConfig.h"
+
+
 
 using namespace Engine;
 
@@ -27,7 +33,6 @@ Engine::FClient* client;
 
 int main() {
 	using namespace std;
-
 	if (!glfwInit()) 
 	{
 		ThrowError("GLFW failed to init");
@@ -38,13 +43,11 @@ int main() {
 		print("GLFW is Loaded");
 	}
 
-
 	engine = new FEngine;
-	client = new FClient; 
+	client = new FClient;
 
-	FTimer* timer = newTimer(1, 0, ETimerType::TickDown, ETimerActionOnCompletion::Repeat);
 
-	CreateGlfwWindow("Engine", engine->windowWidth, engine->windowHeight);
+	CreateGlfwWindow("Engine", DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT, nullptr);
 
 	return 0;
 }
@@ -64,17 +67,26 @@ static bool ProgramTick(float dt)
 		}
 	}
 
-	//Main Processes
+	//Main Processes //Running processes according to load
+
 	{
+		//Pre-Frame
+		//Run task.delay functions
+
 		HandleTimers(dt);
+
 		MainRender(dt);
+		uiMain(dt);
+
+
+		//After-Render
 	}
 
 	return false;
 }
 
 
-void CreateGlfwWindow(const char* WindowName, const int windowWidth, const int windowHeight)
+void CreateGlfwWindow(const char* WindowName, const int windowWidth, const int windowHeight, void(*functionCallback)())
 {
 
 	glfwSetErrorCallback(errorCallback);
@@ -87,23 +99,18 @@ void CreateGlfwWindow(const char* WindowName, const int windowWidth, const int w
 	imGuiIo.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
 
 
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);  
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
 	engine->MainWindow = glfwCreateWindow(windowWidth, windowHeight, WindowName, NULL, NULL);
 
-	if (engine->MainWindow == NULL) {
-		ThrowError("window is nullptr");
-		return;
-	}
-
+	if (engine->MainWindow == NULL) ThrowError("window is nullptr");
 	glfwMakeContextCurrent(engine->MainWindow);
 
 	if (glewInit() != GLEW_OK) ThrowError(std::string("(Entry): GLEW failed to load"));
-	else print(std::string("(Entry): GLEW is loaded"));
 
 	print(std::string(WindowName) + std::string(" window is Created"));
-
-
+	if (functionCallback) functionCallback();
+		
 	ImGui::StyleColorsClassic();
 	ImGui_ImplGlfw_InitForOpenGL(engine->MainWindow, true);
 	ImGui_ImplOpenGL3_Init();
@@ -131,24 +138,14 @@ void CreateGlfwWindow(const char* WindowName, const int windowWidth, const int w
 		bool shouldClose = ProgramTick(engine->deltatime);
 		if (shouldClose) break;
 
-		ImGui::Begin("Engine Panel");
-		
-		if (ImGui::CollapsingHeader("Information")) {
-				
-			ImGui::BulletText((std::string("Mouse Pos: ") + client->mousePos.tostring()).c_str());
-
-		}
-
-		ImGui::End();
-		
-
 		ImGui::Render();
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
 		//#3
-		glfwPollEvents();
 		glfwSwapBuffers(engine->MainWindow);
 		glfwSwapInterval(1);
+		glfwPollEvents();
+
 
 		engine->deltatime = -(std::chrono::duration<float>(previousTime - currentTime).count());
 		previousTime = currentTime;

@@ -1,14 +1,26 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\joe19\\Documents\\GitHub\\GLFW-Application\\GLFWApplication\\",
+  "WorkspaceRootPath": "C:\\Users\\joe19\\OneDrive\\Documents\\GitHub\\GLFW-Application\\GLFWApplication\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{084956F0-9EBD-4191-99CD-0A7619CBB18A}|GLFWApplication.vcxproj|C:\\Users\\joe19\\Documents\\GitHub\\GLFW-Application\\GLFWApplication\\Entry.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{084956F0-9EBD-4191-99CD-0A7619CBB18A}|GLFWApplication.vcxproj|solutionrelative:Entry.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{084956F0-9EBD-4191-99CD-0A7619CBB18A}|GLFWApplication.vcxproj|C:\\Users\\joe19\\OneDrive\\Documents\\GitHub\\GLFW-Application\\GLFWApplication\\Task.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{084956F0-9EBD-4191-99CD-0A7619CBB18A}|GLFWApplication.vcxproj|solutionrelative:Task.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{084956F0-9EBD-4191-99CD-0A7619CBB18A}|GLFWApplication.vcxproj|C:\\Users\\joe19\\Documents\\GitHub\\GLFW-Application\\GLFWApplication\\Entry.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{084956F0-9EBD-4191-99CD-0A7619CBB18A}|GLFWApplication.vcxproj|solutionrelative:Entry.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{084956F0-9EBD-4191-99CD-0A7619CBB18A}|GLFWApplication.vcxproj|C:\\Users\\joe19\\OneDrive\\Documents\\GitHub\\GLFW-Application\\GLFWApplication\\Task.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{084956F0-9EBD-4191-99CD-0A7619CBB18A}|GLFWApplication.vcxproj|solutionrelative:Task.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{084956F0-9EBD-4191-99CD-0A7619CBB18A}|GLFWApplication.vcxproj|C:\\Users\\joe19\\OneDrive\\Documents\\GitHub\\GLFW-Application\\GLFWApplication\\Rendering.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{084956F0-9EBD-4191-99CD-0A7619CBB18A}|GLFWApplication.vcxproj|solutionrelative:Rendering.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{084956F0-9EBD-4191-99CD-0A7619CBB18A}|GLFWApplication.vcxproj|C:\\Users\\joe19\\OneDrive\\Documents\\GitHub\\GLFW-Application\\GLFWApplication\\Rendering.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{084956F0-9EBD-4191-99CD-0A7619CBB18A}|GLFWApplication.vcxproj|solutionrelative:Rendering.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{084956F0-9EBD-4191-99CD-0A7619CBB18A}|GLFWApplication.vcxproj|C:\\Users\\joe19\\OneDrive\\Documents\\GitHub\\GLFW-Application\\GLFWApplication\\EngineUI.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{084956F0-9EBD-4191-99CD-0A7619CBB18A}|GLFWApplication.vcxproj|solutionrelative:EngineUI.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -31,8 +43,8 @@
           ]
         },
         {
-          "DockedWidth": 97,
-          "SelectedChildIndex": 2,
+          "DockedWidth": 127,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -41,27 +53,72 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Entry.h",
-              "DocumentMoniker": "C:\\Users\\joe19\\Documents\\GitHub\\GLFW-Application\\GLFWApplication\\Entry.h",
-              "RelativeDocumentMoniker": "Entry.h",
-              "ToolTip": "C:\\Users\\joe19\\Documents\\GitHub\\GLFW-Application\\GLFWApplication\\Entry.h",
-              "RelativeToolTip": "Entry.h",
-              "ViewState": "AgIAACMAAAAAAAAAAAAnwE8AAAAAAAAAAAAAAA==",
+              "Title": "Task.h",
+              "DocumentMoniker": "C:\\Users\\joe19\\OneDrive\\Documents\\GitHub\\GLFW-Application\\GLFWApplication\\Task.h",
+              "RelativeDocumentMoniker": "Task.h",
+              "ToolTip": "C:\\Users\\joe19\\OneDrive\\Documents\\GitHub\\GLFW-Application\\GLFWApplication\\Task.h",
+              "RelativeToolTip": "Task.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-11-07T03:04:59.592Z",
+              "WhenOpened": "2025-11-10T19:45:17.302Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Rendering.h",
+              "DocumentMoniker": "C:\\Users\\joe19\\OneDrive\\Documents\\GitHub\\GLFW-Application\\GLFWApplication\\Rendering.h",
+              "RelativeDocumentMoniker": "Rendering.h",
+              "ToolTip": "C:\\Users\\joe19\\OneDrive\\Documents\\GitHub\\GLFW-Application\\GLFWApplication\\Rendering.h",
+              "RelativeToolTip": "Rendering.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-11-10T01:49:16.168Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 245,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Entry.cpp",
-              "DocumentMoniker": "C:\\Users\\joe19\\Documents\\GitHub\\GLFW-Application\\GLFWApplication\\Entry.cpp",
-              "RelativeDocumentMoniker": "Entry.cpp",
-              "ToolTip": "C:\\Users\\joe19\\Documents\\GitHub\\GLFW-Application\\GLFWApplication\\Entry.cpp",
-              "RelativeToolTip": "Entry.cpp",
-              "ViewState": "AgIAAGkAAAAAAAAAAAAAAIIAAAAzAAAAAAAAAA==",
+              "Title": "Task.cpp",
+              "DocumentMoniker": "C:\\Users\\joe19\\OneDrive\\Documents\\GitHub\\GLFW-Application\\GLFWApplication\\Task.cpp",
+              "RelativeDocumentMoniker": "Task.cpp",
+              "ToolTip": "C:\\Users\\joe19\\OneDrive\\Documents\\GitHub\\GLFW-Application\\GLFWApplication\\Task.cpp",
+              "RelativeToolTip": "Task.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-11-07T04:18:00.367Z",
+              "WhenOpened": "2025-11-10T19:45:45.737Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "EngineUI.cpp",
+              "DocumentMoniker": "C:\\Users\\joe19\\OneDrive\\Documents\\GitHub\\GLFW-Application\\GLFWApplication\\EngineUI.cpp",
+              "RelativeDocumentMoniker": "EngineUI.cpp",
+              "ToolTip": "C:\\Users\\joe19\\OneDrive\\Documents\\GitHub\\GLFW-Application\\GLFWApplication\\EngineUI.cpp",
+              "RelativeToolTip": "EngineUI.cpp",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAAABoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-11-10T10:05:22.079Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Rendering.cpp",
+              "DocumentMoniker": "C:\\Users\\joe19\\OneDrive\\Documents\\GitHub\\GLFW-Application\\GLFWApplication\\Rendering.cpp",
+              "RelativeDocumentMoniker": "Rendering.cpp",
+              "ToolTip": "C:\\Users\\joe19\\OneDrive\\Documents\\GitHub\\GLFW-Application\\GLFWApplication\\Rendering.cpp",
+              "RelativeToolTip": "Rendering.cpp",
+              "ViewState": "AgIAABYAAAAAAAAAAAAAACYAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-11-10T01:49:18.439Z",
               "EditorCaption": ""
             }
           ]
