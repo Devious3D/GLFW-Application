@@ -14,6 +14,9 @@ static float SampleVerticies[] = {
     0.0f,  0.5f, 0.0f
 };
 
+
+
+
 static unsigned int CreateShaderProgram();
 static unsigned int CompileShader(unsigned int type, const char* sourcePath);
 static void SetUpRender();

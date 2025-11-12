@@ -1,20 +1,21 @@
 #if Timer_cpp == 0
 #define Timer_cpp
 
+#include <vector>
 
 #include "Entry.h"
 #include "Timer.h"
 
 
-FTimer* newTimer(float startingTime, float targetTime, ETimerType type, ETimerActionOnCompletion actionOnComplete)
+FTimer newTimer(float startingTime, float targetTime, ETimerType type, ETimerActionOnCompletion actionOnComplete)
 {
-	FTimer* newTimer = new FTimer();
-	newTimer->startingTime = startingTime;
-	newTimer->TargetTime = targetTime;
-	newTimer->currentTime = startingTime;
-	newTimer->type = type;
-	newTimer->state = ETimerState::Ticking;
-	newTimer->actionOnComplete = actionOnComplete;
+	FTimer newTimer;
+	newTimer.startingTime = startingTime;
+	newTimer.TargetTime = targetTime;
+	newTimer.currentTime = startingTime;
+	newTimer.type = type;
+	newTimer.state = ETimerState::Ticking;
+	newTimer.actionOnComplete = actionOnComplete;
 
 	if (Engine::FEngine* Engine = GetEngine()) {
 		Engine->activeTimers.insert(Engine->activeTimers.end(), newTimer);
@@ -27,6 +28,7 @@ void HandleTimers(float dt)
 {	
 	if (Engine::FEngine* Engine = GetEngine())
 	{
+		
 		std::vector<FTimer*> tickedTimers;
 
 		for (FTimer* timer : Engine->activeTimers) {

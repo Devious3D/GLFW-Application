@@ -1,5 +1,82 @@
-﻿  Task.cpp
-glew32s.lib(glew.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'glew32s.lib(glew.obj)' or at 'C:\Users\joe19\OneDrive\Documents\GitHub\GLFW-Application\GLFWApplication\x64\Debug\vc120.pdb'; linking object as if no debug info
-LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
-LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
-  GLFWApplication.vcxproj -> C:\Users\joe19\OneDrive\Documents\GitHub\GLFW-Application\GLFWApplication\x64\Debug\GLFWApplication.exe
+﻿  EngineUI.cpp
+C:\Users\joe19\Documents\GitHub\GLFW-Application\GLFWApplication\Entry.h(15,7): warning C4099: 'GLFWwindow': type name first seen using 'struct' now seen using 'class'
+  (compiling source file 'EngineUI.cpp')
+      C:\Users\joe19\Documents\GitHub\GLFW-Application\GLFWApplication\Dependencies\GLFW\include\GLFW\glfw3.h(1403,16):
+      see declaration of 'GLFWwindow'
+  
+  Entry.cpp
+C:\Users\joe19\Documents\GitHub\GLFW-Application\GLFWApplication\Memory.h(118,4): error C3861: 'Engine': identifier not found
+  (compiling source file 'Entry.cpp')
+      C:\Users\joe19\Documents\GitHub\GLFW-Application\GLFWApplication\Memory.h(118,4):
+      the template instantiation context (the oldest one first) is
+          C:\Users\joe19\Documents\GitHub\GLFW-Application\GLFWApplication\Memory.h(20,7):
+          while compiling class template 'CMemoryHandler'
+  
+C:\Users\joe19\Documents\GitHub\GLFW-Application\GLFWApplication\Memory.h(118,4): error C2065: 'Engine': undeclared identifier
+  (compiling source file 'Entry.cpp')
+  
+C:\Users\joe19\Documents\GitHub\GLFW-Application\GLFWApplication\Memory.h(131,4): error C3861: 'Engine': identifier not found
+  (compiling source file 'Entry.cpp')
+  
+C:\Users\joe19\Documents\GitHub\GLFW-Application\GLFWApplication\Memory.h(135,33): error C3861: 'Engine': identifier not found
+  (compiling source file 'Entry.cpp')
+  
+C:\Users\joe19\Documents\GitHub\GLFW-Application\GLFWApplication\Memory.h(131,4): error C2065: 'Engine': undeclared identifier
+  (compiling source file 'Entry.cpp')
+  
+C:\Users\joe19\Documents\GitHub\GLFW-Application\GLFWApplication\Memory.h(135,33): error C2065: 'Engine': undeclared identifier
+  (compiling source file 'Entry.cpp')
+  
+C:\Users\joe19\Documents\GitHub\GLFW-Application\GLFWApplication\Memory.h(149,4): error C3861: 'Engine': identifier not found
+  (compiling source file 'Entry.cpp')
+  
+C:\Users\joe19\Documents\GitHub\GLFW-Application\GLFWApplication\Memory.h(149,4): error C2065: 'Engine': undeclared identifier
+  (compiling source file 'Entry.cpp')
+  
+C:\Users\joe19\Documents\GitHub\GLFW-Application\GLFWApplication\Memory.h(166,4): error C3861: 'Engine': identifier not found
+  (compiling source file 'Entry.cpp')
+  
+C:\Users\joe19\Documents\GitHub\GLFW-Application\GLFWApplication\Memory.h(166,4): error C2065: 'Engine': undeclared identifier
+  (compiling source file 'Entry.cpp')
+  
+C:\Users\joe19\Documents\GitHub\GLFW-Application\GLFWApplication\Task.h(16,65): error C2548: 'NewTask': missing default argument for parameter 2
+  (compiling source file 'Entry.cpp')
+  
+C:\Users\joe19\Documents\GitHub\GLFW-Application\GLFWApplication\Task.h(16,65): error C2548: 'NewTask': missing default argument for parameter 3
+  (compiling source file 'Entry.cpp')
+  
+C:\Users\joe19\Documents\GitHub\GLFW-Application\GLFWApplication\Entry.h(15,7): warning C4099: 'GLFWwindow': type name first seen using 'struct' now seen using 'class'
+  (compiling source file 'Entry.cpp')
+      C:\Users\joe19\Documents\GitHub\GLFW-Application\GLFWApplication\Dependencies\GLFW\include\GLFW\glfw3.h(1403,16):
+      see declaration of 'GLFWwindow'
+  
+  Input.cpp
+C:\Users\joe19\Documents\GitHub\GLFW-Application\GLFWApplication\Entry.h(15,7): warning C4099: 'GLFWwindow': type name first seen using 'struct' now seen using 'class'
+  (compiling source file 'Input.cpp')
+      C:\Users\joe19\Documents\GitHub\GLFW-Application\GLFWApplication\Dependencies\GLFW\include\GLFW\glfw3.h(1403,16):
+      see declaration of 'GLFWwindow'
+  
+  Rendering.cpp
+  Task.cpp
+C:\Users\joe19\Documents\GitHub\GLFW-Application\GLFWApplication\Task.h(16,65): error C2548: 'NewTask': missing default argument for parameter 2
+  (compiling source file 'Task.cpp')
+  
+C:\Users\joe19\Documents\GitHub\GLFW-Application\GLFWApplication\Task.h(16,65): error C2548: 'NewTask': missing default argument for parameter 3
+  (compiling source file 'Task.cpp')
+  
+C:\Users\joe19\Documents\GitHub\GLFW-Application\GLFWApplication\Task.cpp(12,26): error C2572: 'NewTask': redefinition of default argument: parameter 1
+      C:\Users\joe19\Documents\GitHub\GLFW-Application\GLFWApplication\Task.h(16,6):
+      see declaration of 'NewTask'
+  
+C:\Users\joe19\Documents\GitHub\GLFW-Application\GLFWApplication\Task.cpp(13,1): error C2548: 'NewTask': missing default argument for parameter 2
+C:\Users\joe19\Documents\GitHub\GLFW-Application\GLFWApplication\Task.cpp(13,1): error C2548: 'NewTask': missing default argument for parameter 3
+  Timer.cpp
+C:\Users\joe19\Documents\GitHub\GLFW-Application\GLFWApplication\Timer.cpp(21,24): error C2228: left of '.insert' must have class/struct/union
+      C:\Users\joe19\Documents\GitHub\GLFW-Application\GLFWApplication\Timer.cpp(21,24):
+      type is 'void *'
+  
+C:\Users\joe19\Documents\GitHub\GLFW-Application\GLFWApplication\Timer.cpp(34,30): error C3312: no callable 'begin' function found for type 'void *'
+C:\Users\joe19\Documents\GitHub\GLFW-Application\GLFWApplication\Timer.cpp(34,30): error C3312: no callable 'end' function found for type 'void *'
+C:\Users\joe19\Documents\GitHub\GLFW-Application\GLFWApplication\Timer.cpp(34,22): error C2143: syntax error: missing ';' before ':'
+C:\Users\joe19\Documents\GitHub\GLFW-Application\GLFWApplication\Timer.cpp(34,44): error C2143: syntax error: missing ';' before ')'
+  Generating Code...

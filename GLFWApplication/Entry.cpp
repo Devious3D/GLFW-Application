@@ -11,16 +11,17 @@
 #include "ImGui\imgui_impl_glfw.h"
 #include "ImGui\imgui_impl_opengl3.h"
 
-#include "Entry.h"
 #include "Memory.h"
-#include "Input.h"
+#include "Input.h" 
 #include "Rendering.h"
 #include "Timer.h"
 #include "UI.h"
+#include "Task.h"
 
 #include  "EngineDefinitions.h"
 #include "EngineConfig.h"
 
+#include "Entry.h"
 
 
 using namespace Engine;
@@ -33,6 +34,7 @@ Engine::FClient* client;
 
 int main() {
 	using namespace std;
+
 	if (!glfwInit()) 
 	{
 		ThrowError("GLFW failed to init");
@@ -44,8 +46,10 @@ int main() {
 	}
 
 	engine = new FEngine;
-	client = new FClient;
+	engine->activeTimers = vector<FTimer>
+	engine->loggedTasks = (std::vector<FLoggedTask>*)engine->loggedTasks;
 
+	client = new FClient;
 
 	CreateGlfwWindow("Engine", DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT, nullptr);
 
@@ -55,7 +59,6 @@ int main() {
 
 static bool ProgramTick(float dt)
 {
-
 	{
 		if (getInputPressed(GLFW_KEY_ESCAPE)) {
 			return true;
@@ -70,16 +73,17 @@ static bool ProgramTick(float dt)
 	//Main Processes //Running processes according to load
 
 	{
-		//Pre-Frame
-		//Run task.delay functions
+		//Run delay tasks functions
 
 		HandleTimers(dt);
+
+		//Before-Render
 
 		MainRender(dt);
 		uiMain(dt);
 
-
 		//After-Render
+		
 	}
 
 	return false;
@@ -155,12 +159,8 @@ void CreateGlfwWindow(const char* WindowName, const int windowWidth, const int w
 	ImGui_ImplGlfw_Shutdown();
 	ImGui::DestroyContext();
 
-
 	glfwTerminate();
 	glfwDestroyWindow(engine->MainWindow);
-
-	delete engine;
-	delete client;
 }
 
 

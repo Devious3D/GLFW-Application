@@ -14,5 +14,9 @@
 
 typedef unsigned int uint;
 
+namespace TaskDefinitions {
+	struct FLoggedTask;
+}
+
 
 #endif

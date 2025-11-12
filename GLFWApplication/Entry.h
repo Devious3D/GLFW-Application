@@ -3,9 +3,8 @@
 #define Entry_h
 
 #include <iostream>
-#include <vector>
 #include <string>
-
+#include <vector>
 
 #define DEFAULT_WINDOW_WIDTH 1000
 #define DEFAULT_WINDOW_HEIGHT 700
@@ -13,7 +12,9 @@
 #define ENGINE_VERSION_MINOR 0
 
 struct FTimer;
+struct FLoggedTask;
 class GLFWwindow;
+
 
 namespace Engine {
 
@@ -56,7 +57,8 @@ namespace Engine {
 
 	public:
 		GLFWwindow* MainWindow = nullptr;
-		std::vector<FTimer*> activeTimers;
+		std::vector<FTimer>* activeTimers;
+		std::vector<>* loggedTasks;
 
 		
 		float deltatime = 0.f;

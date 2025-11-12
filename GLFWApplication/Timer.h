@@ -33,7 +33,7 @@ struct FTimer {
 	void(*onTickFunc)();
 };
 
-FTimer* newTimer(
+FTimer newTimer(
 	 float startingTime,
 	 float targetTime,
 
