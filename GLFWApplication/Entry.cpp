@@ -43,9 +43,24 @@ int main() {
 	}
 
 	engine = new FEngine;
-	engine->loggedTasks.Construct(Kilobytes(1), 5);
+	engine->loggedTasks.Construct(Kilobytes(10), 1000);
 
-	engine->loggedTasks.DeConstruct();
+	for (int i = 0; i < engine->loggedTasks.getMaxSize() - 1; i++) {
+
+
+		TaskDefinitions::FTaskLog newLog;
+		newLog.id = 12345;
+		newLog.repeats = true;
+		newLog.type = TaskDefinitions::TaskType::Delayed;
+		newLog.storeFunc([]() mutable {
+			print("Hello from task Handle");
+		});
+
+		engine->loggedTasks.Insert(newLog);
+	}
+
+	print(std::to_string(engine->loggedTasks.getUsage()
+	));
 
 	client = new FClient;
 

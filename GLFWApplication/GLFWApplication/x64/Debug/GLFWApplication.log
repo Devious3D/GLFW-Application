@@ -1,34 +1,3 @@
-﻿  EngineUI.cpp
-C:\Users\joe19\OneDrive\Documents\GitHub\GLFW-Application\GLFWApplication\Entry.h(14,7): warning C4099: 'GLFWwindow': type name first seen using 'struct' now seen using 'class'
-  (compiling source file 'EngineUI.cpp')
-      C:\Users\joe19\OneDrive\Documents\GitHub\GLFW-Application\GLFWApplication\Dependencies\GLFW\include\GLFW\glfw3.h(1403,16):
-      see declaration of 'GLFWwindow'
-  
-  Entry.cpp
-C:\Users\joe19\OneDrive\Documents\GitHub\GLFW-Application\GLFWApplication\Entry.h(14,7): warning C4099: 'GLFWwindow': type name first seen using 'struct' now seen using 'class'
-  (compiling source file 'Entry.cpp')
-      C:\Users\joe19\OneDrive\Documents\GitHub\GLFW-Application\GLFWApplication\Dependencies\GLFW\include\GLFW\glfw3.h(1403,16):
-      see declaration of 'GLFWwindow'
-  
-C:\Users\joe19\OneDrive\Documents\GitHub\GLFW-Application\GLFWApplication\Memory.h(101,21): warning C4018: '<': signed/unsigned mismatch
-  (compiling source file 'Entry.cpp')
-      C:\Users\joe19\OneDrive\Documents\GitHub\GLFW-Application\GLFWApplication\Memory.h(101,21):
-      the template instantiation context (the oldest one first) is
-          C:\Users\joe19\OneDrive\Documents\GitHub\GLFW-Application\GLFWApplication\Entry.h(57,45):
-          see reference to class template instantiation 'CMemoryHandler<TaskDefinitions::FTaskLog>' being compiled
-          C:\Users\joe19\OneDrive\Documents\GitHub\GLFW-Application\GLFWApplication\Memory.h(92,7):
-          while compiling class template member function 'void CMemoryHandler<TaskDefinitions::FTaskLog>::Construct(unsigned int,unsigned int,unsigned int)'
-              C:\Users\joe19\OneDrive\Documents\GitHub\GLFW-Application\GLFWApplication\Entry.cpp(46,31):
-              see the first reference to 'CMemoryHandler<TaskDefinitions::FTaskLog>::Construct' in 'main'
-  
-  Input.cpp
-C:\Users\joe19\OneDrive\Documents\GitHub\GLFW-Application\GLFWApplication\Entry.h(14,7): warning C4099: 'GLFWwindow': type name first seen using 'struct' now seen using 'class'
-  (compiling source file 'Input.cpp')
-      C:\Users\joe19\OneDrive\Documents\GitHub\GLFW-Application\GLFWApplication\Dependencies\GLFW\include\GLFW\glfw3.h(1403,16):
-      see declaration of 'GLFWwindow'
-  
-  Rendering.cpp
-  Task.cpp
-C:\Users\joe19\OneDrive\Documents\GitHub\GLFW-Application\GLFWApplication\Task.cpp(36,21): warning C4018: '<': signed/unsigned mismatch
-  Generating Code...
-  GLFWApplication.vcxproj -> C:\Users\joe19\OneDrive\Documents\GitHub\GLFW-Application\GLFWApplication\x64\Debug\GLFWApplication.exe
+﻿  Task.cpp
+C:\Users\joe19\Documents\GitHub\GLFW-Application\GLFWApplication\Task.cpp(36,21): warning C4018: '<': signed/unsigned mismatch
+  GLFWApplication.vcxproj -> C:\Users\joe19\Documents\GitHub\GLFW-Application\GLFWApplication\x64\Debug\GLFWApplication.exe

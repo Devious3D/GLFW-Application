@@ -15,17 +15,17 @@ int NewTask(unsigned int type, bool repeats, const void(*function))
 
 	if (function == nullptr) ThrowError(std::string("Must include a function"));
 
-	FTaskLog newTask;
-	newTask.type = type;
-	newTask.repeats = repeats;
-	newTask.function = function;
+	//FTaskLog newTask;
+	//newTask.type = type;
+	//newTask.repeats = repeats;
+	//newTask.function = function;
 	
 
 	/*if (Engine::FEngine* Engine = GetEngine()) {
 		newTask.id = Engine->loggedTasks.size() + 1;
 	}*/
 
-	return newTask.id;
+	return 1;
 }
 
 bool removeTask(unsigned int id)

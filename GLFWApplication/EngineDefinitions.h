@@ -32,12 +32,28 @@ static void print(std::string msg) {
 
 namespace TaskDefinitions {
 
+	enum class TaskType: uint {
+		None = 0,
+		Delayed = 1,
+		AfterRender = 2,
+		BeforeRender = 3
+	};
 
 	struct FTaskLog {
-		unsigned int type;
+	private:
+
+		void(*function) = nullptr;
+
+
+	public:
+
+		TaskType type;
 		unsigned int id;
-		const void(*function) = nullptr;
 		bool repeats;
+
+		void storeFunc(void(*func)()) {
+			this->function = func;
+		}
 	};
 }
 

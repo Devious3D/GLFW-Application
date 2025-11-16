@@ -53,33 +53,25 @@ private:
 		if (startingPoint == nullptr) { return; }
 
 		int newestUsage = 0;
-		int positionCount = 0;
 		int newestActiveElementCount = 0;
 
 		for (;;) {
 
 			newestUsage += sizeof(startingPoint);
 
-			if (IsHandleEmpty(startingPoint) == false) {
+			if (IsHandleEmpty(startingPoint) == false)
 				newestActiveElementCount++;
 
-				startingPoint->position = positionCount;
-				positionCount++;
 
-
-				if (startingPoint->nextHandle == nullptr) break;
-				startingPoint = startingPoint->nextHandle;
-			}
-			else 
-			{
-				lastElement = startingPoint;
-				break;
-			}
-
+			if (startingPoint->nextHandle == nullptr) break;
+			startingPoint = startingPoint->nextHandle;
 		}
+
+		if (usage > capacity) ThrowError("Exceeded Memory");
 
 		this->usage = newestUsage;
 		this->activeElements = newestActiveElementCount;
+		lastElement = startingPoint;
 	}
 	
 
@@ -115,10 +107,10 @@ public:
 
 		this->emptyData = (uint8*)malloc(this->maxElementDataSize);
 
-		//optimize this for loop, your doing infinite loops many times
 		for (int i = 0; i < maxElements; i++) {
 
 			FMemoryHandle* newHandle = new FMemoryHandle(this->maxElementDataSize);
+			newHandle->data = this->emptyData;
 			newHandle->position = i;
 
 			bool isHeadValid = (this->head == nullptr);
@@ -126,42 +118,40 @@ public:
 
 			case true:
 			{
+				i++;
+				FMemoryHandle* extraHandle = new FMemoryHandle(this->maxElementDataSize);
+				extraHandle->position = i;
+
 				head = newHandle;
-				tail = newHandle;
+				head->nextHandle = extraHandle;
+				tail = extraHandle;
 			}
 			break;
 
 			case false:
 
-				//Check if there are 2 or more elemenets initalized
-				//If not, set the next handle on head to the newest handle. Set the tail to the newest handle
-				//If so, next handle on the tail to the newest handle. Set the tail to the newest handle.
+				tail->nextHandle = newHandle;
+				tail = newHandle;
 
-				FMemoryHandle* startingPoint = this->head;
-				if (startingPoint == nullptr) { return; }
-
-				for (;;) {
-
-					if (startingPoint->nextHandle == nullptr) {
-						startingPoint->nextHandle = newHandle;
-						this->tail = newHandle;
-						break;
-					}
-
-					startingPoint = startingPoint->nextHandle;
-				}
 				break;
 			}
 		}
 
+
+		lastElement = tail;
+		tail = head;
+
 		this->Update();
 	}
 
-	void DeConstruct() {
+	void Deconstruct() {
 		FMemoryHandle* startingPoint = head;
 		FMemoryHandle* nextHandle = nullptr;
 
 		for (;;) {
+
+			//Check is the handle is empty, if so clear it
+			//At the end of Deconstruction, free the empty data
 
 			free(startingPoint->data);
 
@@ -192,15 +182,15 @@ public:
 	}
 
 
-	unsigned int Insert(T data) {
+	void Insert(T data) {
 		if (activeElements + 1 >= this->maxElements) ThrowError("Exceed element count");
 		tail = tail->nextHandle;
-		std::memcpy(tail->data, &data, this->maxElementDataSize);
+		std::memcpy(&tail->data, &data, this->maxElementDataSize);
 
-		this->Update();
+		this->Update();	
 	}
 
-	unsigned int Insert(T data, unsigned int position) {
+	void Insert(T data, unsigned int position) {
 		if (position + 1 > this->maxElements) ThrowError("Position out of scope");
 		if (FMemoryHandle* targetHandle = this->Get(position)) std::memcpy(targetHandle->data, &data, this->maxElementDataSize);
 
@@ -277,9 +267,15 @@ public:
 		return this->activeElements;
 	}
 
+	inline uint getMaxSize() {
+		return this->maxElements;
+	}
+
 	inline uint getUsage() {
 		return this->usage;
 	}
+
+	
 
 	inline T operator[](unsigned int position) {
 		if (position + 1 > this->maxElements) ThrowError("Position out of scope");
