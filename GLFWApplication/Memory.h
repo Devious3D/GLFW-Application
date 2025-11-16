@@ -115,6 +115,7 @@ public:
 
 		this->emptyData = (uint8*)malloc(this->maxElementDataSize);
 
+		//optimize this for loop, your doing infinite loops many times
 		for (int i = 0; i < maxElements; i++) {
 
 			FMemoryHandle* newHandle = new FMemoryHandle(this->maxElementDataSize);
@@ -131,6 +132,11 @@ public:
 			break;
 
 			case false:
+
+				//Check if there are 2 or more elemenets initalized
+				//If not, set the next handle on head to the newest handle. Set the tail to the newest handle
+				//If so, next handle on the tail to the newest handle. Set the tail to the newest handle.
+
 				FMemoryHandle* startingPoint = this->head;
 				if (startingPoint == nullptr) { return; }
 
