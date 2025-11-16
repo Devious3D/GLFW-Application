@@ -11,29 +11,26 @@
 #include "ImGui\imgui_impl_glfw.h"
 #include "ImGui\imgui_impl_opengl3.h"
 
-#include "Memory.h"
 #include "Input.h" 
 #include "Rendering.h"
 #include "Timer.h"
 #include "UI.h"
 #include "Task.h"
 
-#include  "EngineDefinitions.h"
 #include "EngineConfig.h"
 
-#include "Entry.h"
+#include "Entry.h" // Engine Definitions
 
 
 using namespace Engine;
 
-Engine::FEngine* engine;
+FEngine* engine;
 
 #if IsSinglePlayer
-Engine::FClient* client;
+FClient* client;
 #endif
 
 int main() {
-	using namespace std;
 
 	if (!glfwInit()) 
 	{
@@ -46,13 +43,14 @@ int main() {
 	}
 
 	engine = new FEngine;
-	engine->activeTimers = vector<FTimer>
-	engine->loggedTasks = (std::vector<FLoggedTask>*)engine->loggedTasks;
+	engine->loggedTasks.Construct(Kilobytes(1), 5);
+
+	engine->loggedTasks.DeConstruct();
 
 	client = new FClient;
 
 	CreateGlfwWindow("Engine", DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT, nullptr);
-
+	  
 	return 0;
 }
 
@@ -75,7 +73,7 @@ static bool ProgramTick(float dt)
 	{
 		//Run delay tasks functions
 
-		HandleTimers(dt);
+		//HandleTimers(dt);
 
 		//Before-Render
 

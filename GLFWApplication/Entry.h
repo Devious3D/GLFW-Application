@@ -2,9 +2,8 @@
 #ifndef Entry_h 
 #define Entry_h
 
-#include <iostream>
-#include <string>
-#include <vector>
+#include "Memory.h" // Engine Definitions
+
 
 #define DEFAULT_WINDOW_WIDTH 1000
 #define DEFAULT_WINDOW_HEIGHT 700
@@ -12,7 +11,6 @@
 #define ENGINE_VERSION_MINOR 0
 
 struct FTimer;
-struct FLoggedTask;
 class GLFWwindow;
 
 
@@ -55,12 +53,11 @@ namespace Engine {
 
 	struct FEngine {
 
-	public:
 		GLFWwindow* MainWindow = nullptr;
-		std::vector<FTimer>* activeTimers;
-		std::vector<>* loggedTasks;
+		CMemoryHandler<TaskDefinitions::FTaskLog> loggedTasks;
+		/*std::vector<FTimer> activeTimers;
+		std::vector<TaskDefinitions::FTaskLog> loggedTasks;*/
 
-		
 		float deltatime = 0.f;
 		bool inputsLocked = false;
 	};
@@ -69,15 +66,6 @@ namespace Engine {
 		Vector2 mousePos;
 		int FPS = 0;
 	};
-
-	static inline void ThrowError(std::string msg) {
-		std::cout << "(Error) | " << msg << std::endl;
-		return throw;
-	}
-
-	static void print(std::string msg) {
-		std::cout << msg << std::endl;
-	}
 }
 
 

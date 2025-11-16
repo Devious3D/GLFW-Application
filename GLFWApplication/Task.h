@@ -7,17 +7,11 @@
 #define TASK_BEFORE_RENDER 3 
 
 
-struct FLoggedTask {
-	unsigned int id = 0;
-	unsigned int type = 0;
-	bool repeatFunction = false;
-	const void(*function) = nullptr;
-};
 
-void NewTask(uint type = 1, bool repeats = false, const void(*function) = nullptr);
-void removeTask(uint id = 0);
+int NewTask(unsigned int type = 1, bool repeats = false, const void(*function) = nullptr);
+bool removeTask(unsigned int id = 0);
 
-void retrivesTasksOfType(uint type = 1);
-void handleTaskType(uint type = 1);
+void retrivesTasksOfType(unsigned int type = 1);
+void handleTaskType(unsigned int type = 1);
 
 #endif // !

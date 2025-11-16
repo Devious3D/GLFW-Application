@@ -42,7 +42,7 @@ static uint CompileShader(unsigned int type, const char* sourcePath)
 		glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &msgLength);
 		char* msg = (char*)(std::to_string(msgLength).c_str());
 		glGetShaderInfoLog(shader, msgLength, &msgLength, msg);
-		Engine::ThrowError(std::string(msg));
+		ThrowError(std::string(msg));
 	}
 
 

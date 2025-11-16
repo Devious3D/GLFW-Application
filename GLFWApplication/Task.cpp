@@ -3,43 +3,56 @@
 
 #include <vector>
 
-#include "EngineDefinitions.h"
-#include "Entry.h"
+#include "Entry.h" // Engine Definitions
 
 #include "Task.h"
 
+using namespace TaskDefinitions;
  
-void NewTask(uint type = 1, bool repeats = false, const void(*function) = nullptr)
+int NewTask(unsigned int type, bool repeats, const void(*function))
 {
 	using namespace std;
 
-	if (function == nullptr) Engine::ThrowError(std::string("Must include a function"));
+	if (function == nullptr) ThrowError(std::string("Must include a function"));
 
-	FLoggedTask newTask;
+	FTaskLog newTask;
 	newTask.type = type;
-	newTask.repeatFunction = repeats;
+	newTask.repeats = repeats;
 	newTask.function = function;
+	
+
+	/*if (Engine::FEngine* Engine = GetEngine()) {
+		newTask.id = Engine->loggedTasks.size() + 1;
+	}*/
+
+	return newTask.id;
+}
+
+bool removeTask(unsigned int id)
+{
+	bool removed = false;
 
 	if (Engine::FEngine* Engine = GetEngine()) {
-		if (vector<FLoggedTask>* engine_logged_tasks = (vector<FLoggedTask>*)Engine->loggedTasks) {
-			engine_logged_tasks->insert(engine_logged_tasks->end(), newTask);
-		}
+		for (int i = 0; i < Engine->loggedTasks.size(); i++) {
+			
+			FTaskLog currentTask = Engine->loggedTasks[i];
+			if (currentTask.id != id) continue;
+
+
+			break;
+;		}
 	}
 
+	return removed;
 }
 
-void removeTask(uint id)
-{
-
-}
-
-void retrivesTasksOfType(uint type)
+void retrivesTasksOfType(unsigned int type)
 {
 
 
 }
 
-void handleTaskType(uint type)
+void handleTaskType(unsigned int type)
 {
 
 }
