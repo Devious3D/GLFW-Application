@@ -21,6 +21,7 @@ struct FMemoryHandle {
 	FMemoryHandle* nextHandle = nullptr;
 	void* data = nullptr;
 	unsigned int position = 0;
+	unsigned int Id;
 
 	inline FMemoryHandle(size_t size) {
 		data = (uint8*)malloc(size);
@@ -80,6 +81,8 @@ private:
 
 		this->usage = newestUsage;
 		this->activeElements = newestActiveElementCount;
+
+
 	}
 	
 
@@ -119,6 +122,7 @@ public:
 		for (int i = 0; i < maxElements; i++) {
 
 			FMemoryHandle* newHandle = new FMemoryHandle(this->maxElementDataSize);
+			newHandle->Id = math_random(100, 1000);
 			newHandle->position = i;
 
 			bool isHeadValid = (this->head == nullptr);

@@ -7,6 +7,8 @@
 #include <string>
 #include <iostream>
 
+#include <Random>
+
 #define Bytes(n) (n)
 #define Kilobytes(n) (1024 * Bytes(n))
 #define Megabytes(n) (1024 * Kilobytes(n))
@@ -29,6 +31,16 @@ static inline void ThrowError(std::string msg) {
 static void print(std::string msg) {
 	std::cout << msg << std::endl;
 }
+
+static int math_random(int min, int max) {
+	std::srand(min);
+	return std::rand() % max;
+}
+
+//static float math_random(float min, float max) {
+//	std::srand(min);
+//	return std::rand() % max;
+//}
 
 namespace TaskDefinitions {
 

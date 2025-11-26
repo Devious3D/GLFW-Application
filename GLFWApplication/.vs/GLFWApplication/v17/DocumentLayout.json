@@ -7,12 +7,12 @@
       "RelativeMoniker": "D:0:0:{084956F0-9EBD-4191-99CD-0A7619CBB18A}|GLFWApplication.vcxproj|solutionrelative:Memory.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{084956F0-9EBD-4191-99CD-0A7619CBB18A}|GLFWApplication.vcxproj|C:\\Users\\joe19\\OneDrive\\Documents\\GitHub\\GLFW-Application\\GLFWApplication\\Entry.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{084956F0-9EBD-4191-99CD-0A7619CBB18A}|GLFWApplication.vcxproj|solutionrelative:Entry.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{084956F0-9EBD-4191-99CD-0A7619CBB18A}|GLFWApplication.vcxproj|C:\\Users\\joe19\\OneDrive\\Documents\\GitHub\\GLFW-Application\\GLFWApplication\\EngineDefinitions.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{084956F0-9EBD-4191-99CD-0A7619CBB18A}|GLFWApplication.vcxproj|solutionrelative:EngineDefinitions.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{084956F0-9EBD-4191-99CD-0A7619CBB18A}|GLFWApplication.vcxproj|C:\\Users\\joe19\\OneDrive\\Documents\\GitHub\\GLFW-Application\\GLFWApplication\\Entry.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{084956F0-9EBD-4191-99CD-0A7619CBB18A}|GLFWApplication.vcxproj|solutionrelative:Entry.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{084956F0-9EBD-4191-99CD-0A7619CBB18A}|GLFWApplication.vcxproj|C:\\Users\\joe19\\OneDrive\\Documents\\GitHub\\GLFW-Application\\GLFWApplication\\Entry.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -30,13 +30,13 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "EngineDefinitions.h",
               "DocumentMoniker": "C:\\Users\\joe19\\OneDrive\\Documents\\GitHub\\GLFW-Application\\GLFWApplication\\EngineDefinitions.h",
               "RelativeDocumentMoniker": "EngineDefinitions.h",
               "ToolTip": "C:\\Users\\joe19\\OneDrive\\Documents\\GitHub\\GLFW-Application\\GLFWApplication\\EngineDefinitions.h",
               "RelativeToolTip": "EngineDefinitions.h",
-              "ViewState": "AgIAAAwAAAAAAAAAAAArwA0AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABAAAAAAAAAAAAAAACYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-11-14T09:50:53.631Z",
               "IsPinned": true,
@@ -52,7 +52,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Entry.cpp",
               "DocumentMoniker": "C:\\Users\\joe19\\OneDrive\\Documents\\GitHub\\GLFW-Application\\GLFWApplication\\Entry.cpp",
               "RelativeDocumentMoniker": "Entry.cpp",
@@ -73,8 +73,7 @@
               "RelativeToolTip": "Entry.h",
               "ViewState": "AgIAADcAAAAAAAAAAAAAADYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-11-14T06:22:33.316Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-14T06:22:33.316Z"
             },
             {
               "$type": "Document",
@@ -84,7 +83,7 @@
               "RelativeDocumentMoniker": "Memory.h",
               "ToolTip": "C:\\Users\\joe19\\OneDrive\\Documents\\GitHub\\GLFW-Application\\GLFWApplication\\Memory.h",
               "RelativeToolTip": "Memory.h",
-              "ViewState": "AgIAAHMAAAAAAAAAAAAAAIkAAABdAAAAAAAAAA==",
+              "ViewState": "AgIAADEAAAAAAAAAAAAAAEgAAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-11-12T19:48:17.611Z",
               "EditorCaption": ""
