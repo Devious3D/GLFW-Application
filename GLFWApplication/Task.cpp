@@ -9,16 +9,13 @@
 
 using namespace TaskDefinitions;
  
-int NewTask(unsigned int type, bool repeats, const void(*function))
+int NewTask(unsigned int type, bool repeats, void(*function)())
 {
 	using namespace std;
 
 	if (function == nullptr) ThrowError(std::string("Must include a function"));
 
-	FTaskLog newTask;
-	newTask.type = type;
-	newTask.repeats = repeats;
-	newTask.function = function;
+	FTaskLog newTask(type, 0, repeats, function);
 	
 
 	/*if (Engine::FEngine* Engine = GetEngine()) {

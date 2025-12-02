@@ -44,6 +44,17 @@ int main() {
 
 	engine = new FEngine;
 	engine->loggedTasks.Construct(Kilobytes(1), 5);
+	
+
+
+	TaskDefinitions::FTaskLog newTask(TASK_DELAY, 100, true, []() mutable {
+		print("Hello World ");
+	});
+	
+
+	int ID = engine->loggedTasks.Insert(newTask);
+
+	int five = 5;
 
 	engine->loggedTasks.DeConstruct();
 

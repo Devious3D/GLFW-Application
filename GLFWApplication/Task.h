@@ -8,7 +8,7 @@
 
 
 
-int NewTask(unsigned int type = 1, bool repeats = false, const void(*function) = nullptr);
+int NewTask(unsigned int type = 1, bool repeats = false, const void(*function)() = nullptr);
 bool removeTask(unsigned int id = 0);
 
 void retrivesTasksOfType(unsigned int type = 1);

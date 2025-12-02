@@ -20,13 +20,16 @@ enum class MemoryHandlerErrorType {
 struct FMemoryHandle {
 	FMemoryHandle* nextHandle = nullptr;
 	void* data = nullptr;
-	unsigned int position = 0;
-	unsigned int Id;
+	unsigned int Id = 0;
 
 	inline FMemoryHandle(size_t size) {
 		data = (uint8*)malloc(size);
 	}
 };
+
+static void MemoryHandleErrorHandling(std::string msg) {
+	ThrowError(std::string("Memory"));
+}
 
 template <typename T>
 class CMemoryHandler {
@@ -35,8 +38,8 @@ class CMemoryHandler {
 private:
 
 	FMemoryHandle* head = nullptr;
-	FMemoryHandle* tail = nullptr;
-	FMemoryHandle* lastElement = nullptr;
+	FMemoryHandle* tail = nullptr; // this is the end of whats allocated to the handles
+	FMemoryHandle* lastElement = nullptr; // this is the end of the array
 
 	uint usage = 0;
 	uint capacity = 0;
@@ -50,56 +53,53 @@ private:
 
 	void Update() {
 
-		FMemoryHandle* startingPoint = this->head;
-		if (startingPoint == nullptr) { return; }
+		if (FMemoryHandle* startingPoint = this->head) {
+			if (startingPoint == nullptr) { return; }
 
-		int newestUsage = 0;
-		int positionCount = 0;
-		int newestActiveElementCount = 0;
+			int newestUsage = 0;
+			int newestActiveElementCount = 0;
 
-		for (;;) {
+			for (;;) {
 
-			newestUsage += sizeof(startingPoint);
+				newestUsage += sizeof(startingPoint);
 
-			if (IsHandleEmpty(startingPoint) == false) {
-				newestActiveElementCount++;
+				if (IsHandleEmpty(startingPoint) == false) {
+					newestActiveElementCount++;
 
-				startingPoint->position = positionCount;
-				positionCount++;
+					if (startingPoint->nextHandle == nullptr) break;
+					startingPoint = startingPoint->nextHandle;
+				}
+				else
+				{
+					tail = startingPoint;
+					break;
+				}
 
-
-				if (startingPoint->nextHandle == nullptr) break;
-				startingPoint = startingPoint->nextHandle;
-			}
-			else 
-			{
-				lastElement = startingPoint;
-				break;
 			}
 
+			this->usage = newestUsage;
+			this->activeElements = newestActiveElementCount;
 		}
-
-		this->usage = newestUsage;
-		this->activeElements = newestActiveElementCount;
-
-
 	}
 	
 
 	bool IsHandleEmpty(FMemoryHandle* handle) {
-		return handle->data == this->emptyData;
+		return handle->Id == 0;
+	} 
+
+	void clearHandle(FMemoryHandle* handle) {
+		handle->Id = 0;
+		std::memcpy(handle->data, &this->emptyData, this->maxElementDataSize);
 	}
 
 
-	FMemoryHandle* Get(unsigned int position) {
-		if (position + 1 > this->maxElements) ThrowError("Position out of scope");
+	FMemoryHandle* Get(unsigned int Id) {
 
 		FMemoryHandle* startingPoint = this->head;
+
 		if (startingPoint == nullptr) ThrowError("Starting point is nullptr");
-
 		for (;;) {
-
-			if (startingPoint->position == position) break;
+			if (startingPoint->Id == Id) break;
 			if (startingPoint->nextHandle == nullptr) break;
 			startingPoint = startingPoint->nextHandle;
 		}
@@ -122,16 +122,20 @@ public:
 		for (int i = 0; i < maxElements; i++) {
 
 			FMemoryHandle* newHandle = new FMemoryHandle(this->maxElementDataSize);
-			newHandle->Id = math_random(100, 1000);
-			newHandle->position = i;
+			std::memcpy(newHandle->data, &this->emptyData, this->maxElementDataSize);
+
 
 			bool isHeadValid = (this->head == nullptr);
 			switch (isHeadValid) {
 
 			case true:
 			{
-				head = newHandle;
-				tail = newHandle;
+				if (FMemoryHandle* newTailHandle = new FMemoryHandle(this->maxElementDataSize)) {
+					head = newHandle;
+					head->nextHandle = newTailHandle;
+
+					tail = newTailHandle;
+				}
 			}
 			break;
 
@@ -141,21 +145,29 @@ public:
 				//If not, set the next handle on head to the newest handle. Set the tail to the newest handle
 				//If so, next handle on the tail to the newest handle. Set the tail to the newest handle.
 
-				FMemoryHandle* startingPoint = this->head;
-				if (startingPoint == nullptr) { return; }
+				tail->nextHandle = newHandle;
+				tail = newHandle;
 
-				for (;;) {
+				//if (FMemoryHandle* startingPoint = this->head) {
+				//	if (startingPoint == nullptr) { return; }
 
-					if (startingPoint->nextHandle == nullptr) {
-						startingPoint->nextHandle = newHandle;
-						this->tail = newHandle;
-						break;
-					}
+				//	for (;;) {
 
-					startingPoint = startingPoint->nextHandle;
-				}
+				//		if (startingPoint->nextHandle == nullptr) {
+				//			startingPoint->nextHandle = newHandle;
+				//			//this->tail = newHandle;
+				//			break;
+				//		}
+
+				//		startingPoint = startingPoint->nextHandle;
+				//	}
+				//}
+				
 				break;
 			}
+
+			this->tail = head;
+			this->lastElement = newHandle;
 		}
 
 		this->Update();
@@ -180,9 +192,7 @@ public:
 
 				startingPoint = nextHandle;
 				nextHandle = nullptr;
-			}
-
-			
+			}	
 		}
 
 		this->usage = 0;
@@ -196,61 +206,61 @@ public:
 	}
 
 
-	unsigned int Insert(T data) {
-		if (activeElements + 1 >= this->maxElements) ThrowError("Exceed element count");
+	inline unsigned int Insert(T data) {
+		if (this->tail->nextHandle == nullptr) ThrowError("Exceed element count");
+		 
+		if (IsHandleEmpty(head) == true) {
+			print("Insterting to Head");
+			head->Id = math_random(100, 1000);
+			std::memcpy(head->data, &data, this->maxElementDataSize);
+			return head->Id;
+		}
+
 		tail = tail->nextHandle;
+		tail->Id = math_random(100, 1000);
 		std::memcpy(tail->data, &data, this->maxElementDataSize);
 
 		this->Update();
-	}
-
-	unsigned int Insert(T data, unsigned int position) {
-		if (position + 1 > this->maxElements) ThrowError("Position out of scope");
-		if (FMemoryHandle* targetHandle = this->Get(position)) std::memcpy(targetHandle->data, &data, this->maxElementDataSize);
-
-		this->Update();
+		return tail->Id;
 	}
 
 
 
-	inline void Remove(unsigned int position) {
-		if (position + 1 > this->maxElements) ThrowError("Position out of scope");
+	inline bool Remove(unsigned int Id) {
+		FMemoryHandle* handleBeforeCurrentTail = nullptr;
 
-		FMemoryHandle* startingPoint = this->head;
-		FMemoryHandle* nextHandle = nullptr;
-		FMemoryHandle* lastHandle = nullptr;
+		//swap back
+		//Move the tail to the point of removal
+		//Then set the newest tail
 
-		for (;;) {
-			if (startingPoint->position == position) {
-				startingPoint->data = this->emptyData;
+		if (FMemoryHandle* startingPoint = this->head) {
+			for (;;) {
+				if (startingPoint->Id == Id) {
 
-				//from the last handle, set its nextHandle to the nextHandle var
+					//cpy the tail to the starting point
+					//set the tail to the handle before the tail
+					std::memcpy(startingPoint->data, &this->tail->data, this->maxElementDataSize);
+					startingPoint->Id = tail->Id;
 
-				for (;;) {
+					clearHandle(tail);
+					print(std::to_string(IsHandleEmpty(tail)));
 
+					tail = handleBeforeCurrentTail;
 
-
-					nextHandle = startingPoint->nextHandle;
-					lastHandle->nextHandle = nextHandle;
-
-					nextHandle = lastHandle->nextHandle;
-
+					break;
 				}
 
-				break;
+				if (startingPoint->nextHandle == nullptr) ThrowError("Handle Not Found");
+
+				handleBeforeCurrentTail = startingPoint;
+				startingPoint = startingPoint->nextHandle;
 			}
-
-
-			if (startingPoint->nextHandle->position == position) lastHandle = startingPoint;
-			startingPoint = startingPoint->nextHandle;
 		}
-		//save the handle before the empty handle
-		//store the next handle
-		//set the last handle to the current handle
-		//set the last handle's "nextHandle to nextHandle;
 
-
+		handleBeforeCurrentTail = nullptr;
 		this->Update();
+
+		return true;
 	}
 
 	//This will loop through the list and return active elements
@@ -285,13 +295,9 @@ public:
 		return this->usage;
 	}
 
-	inline T operator[](unsigned int position) {
-		if (position + 1 > this->maxElements) ThrowError("Position out of scope");
+	inline T operator[](unsigned int Id) {
 
-		FMemoryHandle* targetHandle = this->Get(position);
-		if (IsHandleEmpty(targetHandle)) 
-			ThrowError("Handle is empty");
-
+		FMemoryHandle* targetHandle = this->Get(Id);
 		T* castedData = static_cast<T*>(targetHandle->data);
 
 		return *castedData;

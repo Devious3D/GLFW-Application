@@ -28,7 +28,7 @@ static inline void ThrowError(std::string msg) {
 	return throw;
 }
 
-static void print(std::string msg) {
+static inline void print(std::string msg) {
 	std::cout << msg << std::endl;
 }
 
@@ -48,8 +48,22 @@ namespace TaskDefinitions {
 	struct FTaskLog {
 		unsigned int type;
 		unsigned int id;
-		const void(*function) = nullptr;
+		void(*callbackFunction) = nullptr;
 		bool repeats;
+
+		void set(unsigned int type, unsigned int id, bool repeats, void(*function)()) {
+			this->type = type;
+			this->id = id;
+			this->repeats = repeats;
+			this->callbackFunction = function;
+		}
+
+		FTaskLog(unsigned int type, unsigned int id, bool repeats, void(*function)()) {
+			this->type = type;
+			this->id = id;
+			this->repeats = repeats;
+			this->callbackFunction = function;
+		}
 	};
 }
 
