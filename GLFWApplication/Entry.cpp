@@ -51,10 +51,20 @@ int main() {
 		print("Hello World ");
 	});
 	
+	for (int i = 0; i < 5; i++) {
+		engine->loggedTasks.Insert(newTask);
+	}
 
-	int ID = engine->loggedTasks.Insert(newTask);
 
+	engine->loggedTasks.forEach([](int it, const int handleId, TaskDefinitions::FTaskLog data) {
+
+		print(std::string("Iteration: ") + std::to_string(data.id));
+
+	});
+
+	engine->loggedTasks.Remove(1);
 	int five = 5;
+
 
 	engine->loggedTasks.DeConstruct();
 

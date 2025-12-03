@@ -20,7 +20,10 @@ enum class MemoryHandlerErrorType {
 struct FMemoryHandle {
 	FMemoryHandle* nextHandle = nullptr;
 	void* data = nullptr;
+	const char* callSign = nullptr;
 	unsigned int Id = 0;
+
+
 
 	inline FMemoryHandle(size_t size) {
 		data = (uint8*)malloc(size);
@@ -53,33 +56,33 @@ private:
 
 	void Update() {
 
-		if (FMemoryHandle* startingPoint = this->head) {
-			if (startingPoint == nullptr) { return; }
+		FMemoryHandle* startingPoint = this->head;
 
-			int newestUsage = 0;
-			int newestActiveElementCount = 0;
+		if (startingPoint == nullptr) { return; }
 
-			for (;;) {
+		int newestUsage = 0;
+		int newestActiveElementCount = 0;
 
-				newestUsage += sizeof(startingPoint);
+		for (;;) {
 
-				if (IsHandleEmpty(startingPoint) == false) {
-					newestActiveElementCount++;
+			newestUsage += sizeof(startingPoint);
 
-					if (startingPoint->nextHandle == nullptr) break;
-					startingPoint = startingPoint->nextHandle;
-				}
-				else
-				{
-					tail = startingPoint;
-					break;
-				}
+			if (IsHandleEmpty(startingPoint) == false) {
+				newestActiveElementCount++;
 
+				if (startingPoint->nextHandle == nullptr) break;
+				startingPoint = startingPoint->nextHandle;
+			}
+			else
+			{
+				tail = startingPoint;
+				break;
 			}
 
-			this->usage = newestUsage;
-			this->activeElements = newestActiveElementCount;
 		}
+
+		this->usage = newestUsage;
+		this->activeElements = newestActiveElementCount;
 	}
 	
 
@@ -135,40 +138,25 @@ public:
 					head->nextHandle = newTailHandle;
 
 					tail = newTailHandle;
+
+					i++;
 				}
 			}
 			break;
 
 			case false:
 
-				//Check if there are 2 or more elemenets initalized
-				//If not, set the next handle on head to the newest handle. Set the tail to the newest handle
-				//If so, next handle on the tail to the newest handle. Set the tail to the newest handle.
-
 				tail->nextHandle = newHandle;
 				tail = newHandle;
-
-				//if (FMemoryHandle* startingPoint = this->head) {
-				//	if (startingPoint == nullptr) { return; }
-
-				//	for (;;) {
-
-				//		if (startingPoint->nextHandle == nullptr) {
-				//			startingPoint->nextHandle = newHandle;
-				//			//this->tail = newHandle;
-				//			break;
-				//		}
-
-				//		startingPoint = startingPoint->nextHandle;
-				//	}
-				//}
 				
 				break;
 			}
 
-			this->tail = head;
-			this->lastElement = newHandle;
 		}
+
+		this->lastElement = tail;
+		this->tail = head;
+
 
 		this->Update();
 	}
@@ -206,32 +194,41 @@ public:
 	}
 
 
-	inline unsigned int Insert(T data) {
-		if (this->tail->nextHandle == nullptr) ThrowError("Exceed element count");
+	unsigned int Insert(T data) {
+		if (this->activeElements == this ->maxElements) ThrowError("Exceed element count");
 		 
+		print(std::string("inserting handle"));
+
 		if (IsHandleEmpty(head) == true) {
-			print("Insterting to Head");
-			head->Id = math_random(100, 1000);
+			head->Id = 1;
 			std::memcpy(head->data, &data, this->maxElementDataSize);
+
+			tail = head->nextHandle;
+
 			return head->Id;
 		}
 
-		tail = tail->nextHandle;
-		tail->Id = math_random(100, 1000);
+
+		int id = math_random(100,1000);
+
+		tail->Id = id;
 		std::memcpy(tail->data, &data, this->maxElementDataSize);
+		if (tail->nextHandle != nullptr) tail = tail->nextHandle;
 
 		this->Update();
-		return tail->Id;
+		return id;
 	}
 
 
 
-	inline bool Remove(unsigned int Id) {
+	bool Remove(unsigned int Id) {
 		FMemoryHandle* handleBeforeCurrentTail = nullptr;
 
 		//swap back
 		//Move the tail to the point of removal
 		//Then set the newest tail
+
+		math_random(100, 1000);
 
 		if (FMemoryHandle* startingPoint = this->head) {
 			for (;;) {
@@ -264,7 +261,7 @@ public:
 	}
 
 	//This will loop through the list and return active elements
-	inline void forEach(void(*loopFunc)(const int it, T data)) {
+	inline void forEach(void(*loopFunc)(int it, const int handleId, T data)) {
 		if (loopFunc == nullptr) ThrowError("Must include a lambda");
 
 		if (FMemoryHandle* startingPoint = head) {
@@ -272,10 +269,10 @@ public:
 
 			for (;;) {
 
-				if (this->IsHandleEmpty(startingPoint)) continue;
+				if (this->IsHandleEmpty(startingPoint)) break;
 
 				if (T* castedData = cast<T*>(startingPoint->data)) {
-					loopFunc(currentIt, *castedData);
+					loopFunc(currentIt, startingPoint->Id, *castedData);
 				}
 
 				if (startingPoint->nextHandle == nullptr) break;

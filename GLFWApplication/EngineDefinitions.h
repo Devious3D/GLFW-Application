@@ -51,13 +51,6 @@ namespace TaskDefinitions {
 		void(*callbackFunction) = nullptr;
 		bool repeats;
 
-		void set(unsigned int type, unsigned int id, bool repeats, void(*function)()) {
-			this->type = type;
-			this->id = id;
-			this->repeats = repeats;
-			this->callbackFunction = function;
-		}
-
 		FTaskLog(unsigned int type, unsigned int id, bool repeats, void(*function)()) {
 			this->type = type;
 			this->id = id;
