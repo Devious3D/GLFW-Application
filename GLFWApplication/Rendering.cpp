@@ -2,6 +2,7 @@
 #define Rendering_cpp 1
 
 #include <GL/glew.h>
+#include <string>
 
 #include "Rendering.h"
 #include "Entry.h"
@@ -9,10 +10,14 @@
 #include "EngineDefinitions.h"
 
 using namespace Engine;
+static uint CreateShader(const std::string vertexShader, const std::string fragmentShader) {
+
+}
+
 static uint CreateShaderProgram()
 {
 	uint program = glCreateProgram();
-	uint vert = 0;
+	uint vert = 0; 
 	uint frag = 0;
 
 	glAttachShader(program, vert);
@@ -45,9 +50,7 @@ static uint CompileShader(unsigned int type, const char* sourcePath)
 		ThrowError(std::string(msg));
 	}
 
-
-
-	return uint();
+	return shader;
 }
 
 static void SetUpRender() {
@@ -59,6 +62,12 @@ static void SetUpRender() {
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, 0); // Telling OpenGL what to read
 
+}
+
+void GiantRendeFunction() {
+	//create the shader program
+	//create the shaders: Vert and Frag
+	//
 }
 
 void MainRender(float dt)
