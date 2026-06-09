@@ -67,6 +67,8 @@ static void SetUpRender() {
 void GiantRendeFunction() {
 	//create the shader program
 	//create the shaders: Vert and Frag
+	//Bind the programs
+	//Create and bind the buffers to the VertexBufferObject
 	//
 }
 

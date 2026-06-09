@@ -15,7 +15,6 @@
 #include "Rendering.h"
 #include "Timer.h"
 #include "UI.h"
-#include "Task.h"
 
 #include "EngineConfig.h"
 
@@ -43,31 +42,6 @@ int main() {
 	}
 
 	engine = new FEngine;
-	engine->loggedTasks.Construct(Kilobytes(1), 5);
-	
-
-
-	TaskDefinitions::FTaskLog newTask(TASK_DELAY, 100, true, []() mutable {
-		print("Hello World ");
-	});
-	
-	for (int i = 0; i < 5; i++) {
-		engine->loggedTasks.Insert(newTask);
-	}
-
-
-	engine->loggedTasks.forEach([](int it, const int handleId, TaskDefinitions::FTaskLog data) {
-
-		print(std::string("Iteration: ") + std::to_string(data.id));
-
-	});
-
-	engine->loggedTasks.Remove(1);
-	int five = 5;
-
-
-	engine->loggedTasks.DeConstruct();
-
 	client = new FClient;
 
 	CreateGlfwWindow("Engine", DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT, nullptr);
@@ -193,12 +167,12 @@ void errorCallback(int error, const char* errordesc)
 	}
 }
 
-Engine::FEngine* GetEngine()
+Engine::FEngine* getEngine()
 {
 	return engine;
 }
 
-Engine::FClient* GetClient()
+constexpr Engine::FClient* GetClient()
 {
 	return client;
 }

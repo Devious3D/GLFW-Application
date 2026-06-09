@@ -54,7 +54,7 @@ namespace Engine {
 	struct FEngine {
 
 		GLFWwindow* MainWindow = nullptr;
-		CMemoryHandler<TaskDefinitions::FTaskLog> loggedTasks;
+		//CMemoryHandler<TaskDefinitions::FTaskLog> loggedTasks;
 		/*std::vector<FTimer> activeTimers;
 		std::vector<TaskDefinitions::FTaskLog> loggedTasks;*/
 
@@ -78,8 +78,8 @@ static void CreateGlfwWindow(
 );
 
 static void errorCallback(int error, const char* errordesc);
-Engine::FEngine* GetEngine();
-Engine::FClient* GetClient();
+Engine::FEngine* getEngine();
+constexpr Engine::FClient* GetClient();
 
 
 

@@ -15,7 +15,7 @@
 bool getInputPressed(int key)
 {
 	bool pressed = false;
-	if (Engine::FEngine* Engine = GetEngine()) {
+	if (Engine::FEngine* Engine = getEngine()) {
 		if (Engine->inputsLocked) return false;
 
 		if (GLFWwindow* currentWindow = glfwGetCurrentContext()) {
@@ -34,7 +34,7 @@ bool getKeyEnded(int key)
 {
 	bool Ended = false;
 
-	if (Engine::FEngine* Engine = GetEngine()) {
+	if (Engine::FEngine* Engine = getEngine()) {
 		if (Engine->inputsLocked) return false;
 
 		if (GLFWwindow* currentWindow = glfwGetCurrentContext()) {
@@ -52,7 +52,7 @@ bool getKeyHeld(int key)
 {
 	bool held = false;
 
-	if (Engine::FEngine* Engine = GetEngine()) {
+	if (Engine::FEngine* Engine = getEngine()) {
 		if (Engine->inputsLocked) return false;
 
 		if (GLFWwindow* currentWindow = glfwGetCurrentContext()) {

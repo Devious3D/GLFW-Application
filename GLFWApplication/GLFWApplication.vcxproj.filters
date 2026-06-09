@@ -81,12 +81,6 @@
     <ClCompile Include="UI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Task.cpp">
-      <Filter>Source Files\Util</Filter>
-    </ClCompile>
-    <ClCompile Include="ListenerEvent.cpp">
-      <Filter>Source Files\Components</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entry.h">
@@ -119,9 +113,6 @@
     <ClInclude Include="UI.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Task.h">
-      <Filter>Header Files\Util</Filter>
-    </ClInclude>
     <ClInclude Include="ImGui\imconfig.h">
       <Filter>Resource Files\ImGui</Filter>
     </ClInclude>
@@ -148,9 +139,6 @@
     </ClInclude>
     <ClInclude Include="ImGui\imstb_truetype.h">
       <Filter>Resource Files\ImGui</Filter>
-    </ClInclude>
-    <ClInclude Include="ListenerEvent.h">
-      <Filter>Header Files\Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
