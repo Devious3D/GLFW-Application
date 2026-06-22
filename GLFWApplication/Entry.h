@@ -12,6 +12,7 @@
 
 struct FTimer;
 class GLFWwindow;
+class Renderer;
 
 
 namespace Engine {
@@ -20,6 +21,12 @@ namespace Engine {
 	struct Vector2;
 	struct Vector3;
 	struct FEngine;
+
+	enum class EngineState : int {
+		none = -1,
+		running = 0,
+		closing = 1
+	};
 
 	static const std::vector<int> glfwErrorsToIgnore = {
 		65539
@@ -51,15 +58,16 @@ namespace Engine {
 		}
 	};
 
+
 	struct FEngine {
 
 		GLFWwindow* MainWindow = nullptr;
-		//CMemoryHandler<TaskDefinitions::FTaskLog> loggedTasks;
-		/*std::vector<FTimer> activeTimers;
-		std::vector<TaskDefinitions::FTaskLog> loggedTasks;*/
+		Renderer* renderer;
 
+		EngineState engineState = EngineState::none;
 		float deltatime = 0.f;
 		bool inputsLocked = false;
+		bool wireFrameMode = false;
 	};
 
 	struct FClient {
@@ -79,7 +87,7 @@ static void CreateGlfwWindow(
 
 static void errorCallback(int error, const char* errordesc);
 Engine::FEngine* getEngine();
-constexpr Engine::FClient* GetClient();
+Engine::FClient* GetClient();
 
 
 

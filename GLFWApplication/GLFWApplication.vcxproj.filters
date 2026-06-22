@@ -140,5 +140,8 @@
     <ClInclude Include="ImGui\imstb_truetype.h">
       <Filter>Resource Files\ImGui</Filter>
     </ClInclude>
+    <ClInclude Include="RenderMath.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

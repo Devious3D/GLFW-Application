@@ -179,6 +179,7 @@
     <ClInclude Include="LinkedList.h" />
     <ClInclude Include="Memory.h" />
     <ClInclude Include="Rendering.h" />
+    <ClInclude Include="RenderMath.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="UI.h" />
   </ItemGroup>

@@ -2,85 +2,177 @@
 #define Rendering_cpp 1
 
 #include <GL/glew.h>
-#include <string>
+#include <GLFW/glfw3.h>
+#include <iostream>
+#include <sstream>
+#include <fstream>
 
-#include "Rendering.h"
-#include "Entry.h"
+#include "Rendering.h" //<string>, <vector>, RenderMath
+#include "Entry.h" // Memory.h
 
-#include "EngineDefinitions.h"
 
-using namespace Engine;
-static uint CreateShader(const std::string vertexShader, const std::string fragmentShader) {
 
-}
-
-static uint CreateShaderProgram()
+std::string parseShaderFromFile(const char* filePath)
 {
-	uint program = glCreateProgram();
-	uint vert = 0; 
-	uint frag = 0;
+	using namespace std;
 
-	glAttachShader(program, vert);
-	glAttachShader(program, frag);
-	glLinkProgram(program);
-	glValidateProgram(program);
+	ifstream file(filePath);
+	stringstream inStream;
 
-
-	glDeleteShader(vert);
-	glDeleteShader(frag);
-	
-	return program;
-}
-
-static uint CompileShader(unsigned int type, const char* sourcePath)
-{
-	uint shader = glCreateShader(type);
-
-	glGetShaderSource(shader, 1, NULL, nullptr);
-	glCompileShader(shader);
-
-	int result;
-	glGetShaderiv(shader, GL_COMPILE_STATUS, &result);
-	if (result == GL_FALSE) {
-		
-		int msgLength;
-		glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &msgLength);
-		char* msg = (char*)(std::to_string(msgLength).c_str());
-		glGetShaderInfoLog(shader, msgLength, &msgLength, msg);
-		ThrowError(std::string(msg));
+	string line;
+	while (getline(file, line)) {
+		inStream << line << "\n";
 	}
 
-	return shader;
+
+	return inStream.str();
 }
 
-static void SetUpRender() {
-		
-	glGenBuffers(1, &VertexBufferObject); // creat the Buffer
-	glBindBuffer(GL_ARRAY_BUFFER, VertexBufferObject); // Select the Buffer
-	glBufferData(GL_ARRAY_BUFFER, 9 * sizeof(float), SampleVerticies, GL_STATIC_DRAW); // Putting data in the buffer
+void renderStart()
+{
+#if basicRendering
+
+	const char* basic_Frag = "Shaders/BasicShader/Basic_frag.frag";
+	const char* basic_Vert = "Shaders/BasicShader/Basic_vert.vert";
+
+	deleteLater_basicProg = ShaderProgram(basic_Vert, basic_Frag);
+
 	
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, 0); // Telling OpenGL what to read
+#elif
 
+
+#endif
 }
 
-void GiantRendeFunction() {
-	//create the shader program
-	//create the shaders: Vert and Frag
-	//Bind the programs
-	//Create and bind the buffers to the VertexBufferObject
-	//
-}
+
+
 
 void MainRender(float dt)
 {
-	//if (FEngine* Engine = GetEngine()) {
-	//	print(std::to_string(Engine->deltatime));
-	//}
 
-	
+	if (Engine::FEngine* engine = getEngine()) {
+		switch (engine->wireFrameMode) {
+		case true: glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); break;
+		case false: glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		}
+	}
 
+
+
+#if basicRendering
+
+	//Vertex p1;
+	//p1.position = { 0.f, -.5f, 0.f };
+
+	//Vertex p2;
+	//p2.position = { -1.f, -.5f, 0.f };
+
+	//Vertex p3;
+	//p3.position = { -.5f, 0.5f, 0.f };
+
+	Quad test_quad;
+
+		 
+
+	uint buffer;
+	glGenBuffers(1, &buffer);
+	glBindBuffer(GL_ARRAY_BUFFER, buffer);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(QuadVerticies), QuadVerticies, GL_STATIC_DRAW);
+
+	uint ElementBuffer;
+	glGenBuffers(1, &ElementBuffer);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ElementBuffer);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indicies), indicies, GL_STATIC_DRAW);;
+
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, (void*)0);
+	glEnableVertexAttribArray(0);
+
+
+
+	glUseProgram(deleteLater_basicProg.getProgram());
+	glBindVertexArray(buffer);
+	//glDrawArrays(GL_TRIANGLES, 0, 6);
+	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+	glBindVertexArray(0);
+
+#elif
+
+#endif
+
+	/*if (FEngine* Engine = getEngine()) {
+		std::cout << "Delta time:" << std::to_string(Engine->deltatime) << std::endl;
+	}*/
 }
+
+
+
+uint ShaderProgram::compileShader(unsigned int type, const char* path)
+{
+	uint newShader = glCreateShader(type);
+	std::string shaderCode = parseShaderFromFile(path);
+	const char* code_to_char = shaderCode.c_str();
+
+;	std::cout << shaderCode << std::endl;
+
+	glShaderSource(newShader, 1, &code_to_char, nullptr);
+	glCompileShader(newShader);
+
+	//debug
+	int success;
+	char info[512];
+	glGetShaderiv(newShader, GL_COMPILE_STATUS, &success);
+	if (!success) {
+		glGetShaderInfoLog(newShader, 512, NULL, info);
+		throw std::runtime_error(std::string(info));
+		//cout << "Shader compile error: " << info << endl;
+	}
+
+	return newShader;
+}
+
+
+ShaderProgram::ShaderProgram(const char* vertSource, const char* fragSource)
+{
+	this->program = glCreateProgram();
+
+	//std::cout << "Program ID: " << program << std::endl;
+
+	this->vert = this->compileShader(GL_VERTEX_SHADER, vertSource);
+	this->frag = this->compileShader(GL_FRAGMENT_SHADER, fragSource);
+
+	glAttachShader(this->program, this->vert);
+	glAttachShader(this->program, this->frag);
+	glLinkProgram(this->program);
+
+	glDeleteShader(this->vert);
+	glDeleteShader(this->frag);
+
+
+	int progSucc;
+	char info[512];
+	glGetProgramiv(this->program, GL_LINK_STATUS, &progSucc);
+	if (!progSucc) {
+		glGetProgramInfoLog(this->program, 512, NULL, info);
+		throw std::runtime_error(std::string("Shader Program Error: ") + std::string(info));
+	}
+
+	std::cout << "Shader Created" << std::endl;
+}
+
+ShaderProgram::~ShaderProgram()
+{
+	std::cout << "Shader destruction" << std::endl;
+}
+
+Renderer::~Renderer()
+{
+}
+
+void Renderer::setProgram(ShaderProgram prog)
+{
+	this->currProgram = prog;
+}
+
 
 
 #endif

@@ -9,6 +9,8 @@
 
 #include "EngineUI.h"
 
+#define gui ImGui
+
 
 void MainEnginePanel()
 {
@@ -18,6 +20,8 @@ void MainEnginePanel()
 	if (ImGui::CollapsingHeader("Info")) {
 		using namespace std;
 
+
+		//Info
 		ImGui::SeparatorText("Backends Versions");
 
 		const string engineVersion = string("Engine version: ") +
@@ -37,6 +41,15 @@ void MainEnginePanel()
 			to_string(major) + string(".") + to_string(minor);
 
 		ImGui::BulletText(glVerion.c_str());
+
+		//Settings
+		ImGuiIO io = gui::GetIO();
+		if (Engine::FEngine* engine = getEngine()) {
+			gui::SeparatorText("RenderSettings");
+			gui::Checkbox("Show Wireframe", &engine->wireFrameMode);
+		}
+
+		
 	}
 
 	ImGui::End();

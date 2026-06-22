@@ -2,12 +2,12 @@
 #ifndef EngineDefinitions_h
 #define EngineDefinitions_h
 
-
-#include <vector>
 #include <string>
 #include <iostream>
 
 #include <Random>
+
+#include <initializer_list>
 
 #define Bytes(n) (n)
 #define Kilobytes(n) (1024 * Bytes(n))
@@ -65,6 +65,58 @@ namespace TimerDefinitions {
 
 	};
 }
+
+namespace Vector {
+
+	struct vec2;
+	struct vec3;
+	struct vec4;
+
+	struct VectorComponent {
+		
+		/*template <typename T>
+		static T operator+(T) {
+
+		}*/
+	};
+	
+
+
+
+	struct vec2 {
+		float x;
+		float y;
+
+		vec2(float _x, float _y) : x(_x), y(_y) {}
+
+		vec2 operator+ (vec2 vectorToAdd) {
+			return vec2(x + vectorToAdd.x, y + vectorToAdd.y);
+		}
+
+	};
+
+	struct vec3 {
+		float x;
+		float y;
+		float z;
+
+		vec3() {}
+		vec3(float _x, float _y, float _z) : x(_x), y(_y), z(_z) {}
+
+	};
+
+	struct Vertex {
+		vec3 position;
+
+		Vertex(float position_x, float position_y, float position_z) 
+		{
+			this->position = vec3(position_x, position_y, position_z);
+		}
+	};
+
+}
+
+
 
 
 #endif // EngineDefinitions_h

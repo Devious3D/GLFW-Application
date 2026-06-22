@@ -2,6 +2,7 @@
 #define Entry_cpp 1
 
 
+
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <chrono>
@@ -21,6 +22,8 @@
 #include "Entry.h" // Engine Definitions
 
 
+
+
 using namespace Engine;
 
 FEngine* engine;
@@ -30,7 +33,7 @@ FClient* client;
 #endif
 
 int main() {
-
+	using namespace std;
 	if (!glfwInit()) 
 	{
 		ThrowError("GLFW failed to init");
@@ -44,8 +47,9 @@ int main() {
 	engine = new FEngine;
 	client = new FClient;
 
+
 	CreateGlfwWindow("Engine", DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT, nullptr);
-	  
+
 	return 0;
 }
 
@@ -108,10 +112,19 @@ void CreateGlfwWindow(const char* WindowName, const int windowWidth, const int w
 	print(std::string(WindowName) + std::string(" window is Created"));
 	if (functionCallback) functionCallback();
 		
-	ImGui::StyleColorsClassic();
-	ImGui_ImplGlfw_InitForOpenGL(engine->MainWindow, true);
-	ImGui_ImplOpenGL3_Init();
+	ImGui::StyleColorsClassic();	
 
+	if (engine->MainWindow) {
+		ImGui_ImplGlfw_InitForOpenGL(engine->MainWindow, true);
+		ImGui_ImplOpenGL3_Init();
+	}
+	else throw std::runtime_error("Window is not created?");
+
+	//Change this with render class
+	renderStart();
+
+	engine->renderer = new Renderer();
+	engine->renderer->setProgram(deleteLater_basicProg);
 
 	auto currentTime = std::chrono::high_resolution_clock::now();
 	auto previousTime = currentTime;
@@ -132,8 +145,13 @@ void CreateGlfwWindow(const char* WindowName, const int windowWidth, const int w
 
 		//#2
 		//Ui Should be able to render at this point
+		engine->engineState = EngineState::running;
+
 		bool shouldClose = ProgramTick(engine->deltatime);
-		if (shouldClose) break;
+		if (shouldClose) {
+			engine->engineState = EngineState::closing;
+			break;
+		}
 
 		ImGui::Render();
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
@@ -161,6 +179,7 @@ void errorCallback(int error, const char* errordesc)
 {
 	for (int i = 0; i < glfwErrorsToIgnore.size(); i++) {
 		if (error == glfwErrorsToIgnore[i]) continue;
+		if (getEngine()->engineState == EngineState::closing) break;
 		
 		ThrowError(errordesc);
 		break;
@@ -172,7 +191,7 @@ Engine::FEngine* getEngine()
 	return engine;
 }
 
-constexpr Engine::FClient* GetClient()
+Engine::FClient* GetClient()
 {
 	return client;
 }
