@@ -49,6 +49,7 @@ void renderStart()
 
 void MainRender(float dt)
 {
+	using namespace std;
 
 	if (Engine::FEngine* engine = getEngine()) {
 		switch (engine->wireFrameMode) {
@@ -84,9 +85,19 @@ void MainRender(float dt)
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ElementBuffer);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indicies), indicies, GL_STATIC_DRAW);;
 
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, (void*)0);
 	glEnableVertexAttribArray(0);
 
+	//Position
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, (void*)0);
+
+
+	//Color
+	
+	
+	double engineTime = getEngine()->engineTime;
+	float greenValue = sin(engineTime) / 2.f + .5f;
+	int vertexColorLocation = glGetUniformLocation(deleteLater_basicProg.getProgram(), "finalColor");
+	glUniform4f(vertexColorLocation, 0.f, greenValue, 0.f, 1.f);
 
 
 	glUseProgram(deleteLater_basicProg.getProgram());
@@ -123,13 +134,17 @@ uint ShaderProgram::compileShader(unsigned int type, const char* path)
 	glGetShaderiv(newShader, GL_COMPILE_STATUS, &success);
 	if (!success) {
 		glGetShaderInfoLog(newShader, 512, NULL, info);
-		throw std::runtime_error(std::string(info));
+
+		if (type == GL_VERTEX_SHADER) std::cout << "Vertex Shader Error" << std::endl;
+		else std::cout << "Fragment Shader Error" << std::endl;
+		
+		std::cout << info << std::endl;
+		throw std::runtime_error("Shader Compile Error");
 		//cout << "Shader compile error: " << info << endl;
 	}
 
 	return newShader;
 }
-
 
 ShaderProgram::ShaderProgram(const char* vertSource, const char* fragSource)
 {
@@ -153,7 +168,8 @@ ShaderProgram::ShaderProgram(const char* vertSource, const char* fragSource)
 	glGetProgramiv(this->program, GL_LINK_STATUS, &progSucc);
 	if (!progSucc) {
 		glGetProgramInfoLog(this->program, 512, NULL, info);
-		throw std::runtime_error(std::string("Shader Program Error: ") + std::string(info));
+		std::cout << info << std::endl;
+		throw std::runtime_error("Shader link Error");
 	}
 
 	std::cout << "Shader Created" << std::endl;
@@ -163,6 +179,8 @@ ShaderProgram::~ShaderProgram()
 {
 	std::cout << "Shader destruction" << std::endl;
 }
+
+
 
 Renderer::~Renderer()
 {

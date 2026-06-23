@@ -39,8 +39,13 @@ const unsigned int indicies[]{
     1, 2, 3
 };
 
+
+//
+
 class Quad {
 public:
+
+    
 
     Vector::Vertex verticies[4]{
         Vector::Vertex(.5f, -.5f, 0.f),
@@ -49,9 +54,7 @@ public:
         Vector::Vertex(.5f, .5f, 0.f)
     };
 
-    Quad();
-
-
+    Quad() {}
 };
 
 
@@ -77,7 +80,6 @@ public:
 
 };
 
-using namespace Vector;
 
 class Renderer {
 

@@ -66,6 +66,7 @@ namespace Engine {
 
 		EngineState engineState = EngineState::none;
 		float deltatime = 0.f;
+		double engineTime = 0.00f;
 		bool inputsLocked = false;
 		bool wireFrameMode = false;
 	};

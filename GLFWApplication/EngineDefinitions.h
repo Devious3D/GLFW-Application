@@ -78,15 +78,15 @@ namespace Vector {
 		static T operator+(T) {
 
 		}*/
+
+
 	};
-	
-
-
 
 	struct vec2 {
 		float x;
 		float y;
 
+		vec2() {}
 		vec2(float _x, float _y) : x(_x), y(_y) {}
 
 		vec2 operator+ (vec2 vectorToAdd) {
@@ -106,12 +106,39 @@ namespace Vector {
 	};
 
 	struct Vertex {
+
+	public:
+
+		float glData[6] = {
+			0.f, 0.f, 0.f, // Position
+			//0.f, 0.f, 0.f, // color
+		};
+
 		vec3 position;
+		vec3 color;
+		vec2 texCoords;
+	
 
 		Vertex(float position_x, float position_y, float position_z) 
 		{
 			this->position = vec3(position_x, position_y, position_z);
 		}
+
+
+		void setGlData() {
+
+			//Position
+			glData[0] = position.x;
+			glData[1] = position.y;
+			glData[2] = position.z;
+
+			//color
+			//glData[3] = color.x;
+			//glData[4] = position.x;
+			//glData[5] = position.x;
+
+		}
+
 	};
 
 }

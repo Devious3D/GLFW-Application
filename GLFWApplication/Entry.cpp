@@ -134,6 +134,7 @@ void CreateGlfwWindow(const char* WindowName, const int windowWidth, const int w
 		currentTime = std::chrono::high_resolution_clock::now();
 
 		//#1
+		glClearColor(0.f, 0.f, 0.f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		if (imGuiIo.WantCaptureMouse) engine->inputsLocked = true;
@@ -164,6 +165,8 @@ void CreateGlfwWindow(const char* WindowName, const int windowWidth, const int w
 
 		engine->deltatime = -(std::chrono::duration<float>(previousTime - currentTime).count());
 		previousTime = currentTime;
+
+		engine->engineTime += engine->deltatime;
 	}
 
 	ImGui_ImplOpenGL3_Shutdown();
