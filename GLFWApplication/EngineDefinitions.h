@@ -72,15 +72,6 @@ namespace Vector {
 	struct vec3;
 	struct vec4;
 
-	struct VectorComponent {
-		
-		/*template <typename T>
-		static T operator+(T) {
-
-		}*/
-
-
-	};
 
 	struct vec2 {
 		float x;
@@ -111,7 +102,7 @@ namespace Vector {
 
 		float glData[6] = {
 			0.f, 0.f, 0.f, // Position
-			//0.f, 0.f, 0.f, // color
+			0.f, 0.f, 0.f, // color
 		};
 
 		vec3 position;
@@ -119,9 +110,12 @@ namespace Vector {
 		vec2 texCoords;
 	
 
-		Vertex(float position_x, float position_y, float position_z) 
+		Vertex(float position_x=0.f, float position_y=0.f, float position_z=0.f,
+			   float color_x=0.f, float color_y=1.f, float color_z=0.f
+			) 
 		{
 			this->position = vec3(position_x, position_y, position_z);
+			this->color = vec3(color_x, color_y, color_z);
 		}
 
 
@@ -133,9 +127,9 @@ namespace Vector {
 			glData[2] = position.z;
 
 			//color
-			//glData[3] = color.x;
-			//glData[4] = position.x;
-			//glData[5] = position.x;
+			glData[3] = color.x;
+			glData[4] = color.y;
+			glData[5] = color.z;
 
 		}
 

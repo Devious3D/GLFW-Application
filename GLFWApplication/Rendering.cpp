@@ -70,34 +70,52 @@ void MainRender(float dt)
 
 	//Vertex p3;
 	//p3.position = { -.5f, 0.5f, 0.f };
+	
+
+	Renderer* renderer = getEngine()->renderer;
 
 	Quad test_quad;
 
-		 
+	for (Vector::Vertex vert : test_quad.verticies) {
+		vert.setGlData();
+		for (float componentVal : vert.glData) {
+			//cout << "Component: " << componentVal << endl;
+			renderer->verticies.push_back(componentVal);
+		}
 
+	}
+
+	const void *vertsRaw = renderer->verticies.data();
+
+	//const float vertsRaw_deref = *vertsRaw;
+	//cout << verticies << endl;
+
+	   
 	uint buffer;
 	glGenBuffers(1, &buffer);
 	glBindBuffer(GL_ARRAY_BUFFER, buffer);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(QuadVerticies), QuadVerticies, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * renderer->verticies.size(), vertsRaw, GL_STATIC_DRAW);
 
 	uint ElementBuffer;
 	glGenBuffers(1, &ElementBuffer);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ElementBuffer);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indicies), indicies, GL_STATIC_DRAW);;
 
-	glEnableVertexAttribArray(0);
+
 
 	//Position
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, (void*)0);
-
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 6, (void*)0);
+	glEnableVertexAttribArray(0);
 
 	//Color
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 6, (void*)(3 * sizeof(float) ));
+	glEnableVertexAttribArray(1);
+
 	
-	
-	double engineTime = getEngine()->engineTime;
-	float greenValue = sin(engineTime) / 2.f + .5f;
-	int vertexColorLocation = glGetUniformLocation(deleteLater_basicProg.getProgram(), "finalColor");
-	glUniform4f(vertexColorLocation, 0.f, greenValue, 0.f, 1.f);
+	//double engineTime = getEngine()->engineTime;
+	//float greenValue = sin(engineTime) / 2.f + .5f;
+	//int vertexColorLocation = glGetUniformLocation(deleteLater_basicProg.getProgram(), "finalColor");
+	//glUniform4f(vertexColorLocation, 0.f, greenValue, 0.f, 1.f);
 
 
 	glUseProgram(deleteLater_basicProg.getProgram());
@@ -105,6 +123,8 @@ void MainRender(float dt)
 	//glDrawArrays(GL_TRIANGLES, 0, 6);
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);
+
+	renderer->verticies.clear();
 
 #elif
 

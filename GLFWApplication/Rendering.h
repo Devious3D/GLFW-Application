@@ -48,10 +48,10 @@ public:
     
 
     Vector::Vertex verticies[4]{
-        Vector::Vertex(.5f, -.5f, 0.f),
-        Vector::Vertex(-.5f, -.5f, 0.f),
-        Vector::Vertex(-.5f, .5f, 0.f),
-        Vector::Vertex(.5f, .5f, 0.f)
+        Vector::Vertex(.5f, -.5f, 0.f, 1.f, 1.0f, 0.f),
+        Vector::Vertex(-.5f, -.5f, 0.f, 0.f, 1.0f, 0.f),
+        Vector::Vertex(-.5f, .5f, 0.f, 0.f, 1.0f, 1.f),
+        Vector::Vertex(.5f, .5f, 0.f, .5f, 1.0f, 0.f)
     };
 
     Quad() {}
@@ -91,6 +91,9 @@ private:
     //std::vector<Vertex, std::allocator<Vertex>, > verticies;
 
 public:
+
+    std::vector<float> verticies;
+
 
     //Create the Buffers
     //Bind the data

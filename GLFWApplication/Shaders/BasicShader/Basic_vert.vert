@@ -10,5 +10,5 @@ out vec4 finalColor;
  
 void main() {
     gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);
-    finalColor = vec4(0.f, 1.f, 0.f, 1.0f);
+    finalColor = vec4(aColor.x, aColor.y, aColor.z, 1.0f);
 }

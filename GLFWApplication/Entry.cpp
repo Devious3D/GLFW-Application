@@ -45,6 +45,8 @@ int main() {
 	}
 
 	engine = new FEngine;
+	engine->renderer = new Renderer;
+
 	client = new FClient;
 
 
